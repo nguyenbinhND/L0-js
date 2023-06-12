@@ -3,7 +3,7 @@ var keyLocalStorageItemCart = "DANHSACHITEMCART";
 var listDataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageListSP));
 var dataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
 var cartCategory = document.querySelector(".cart__category");
-var tbodyCart = document.querySelector(".cart-body");
+var tbodyCart = document.querySelector("tbody");
 
 // console.log(listDataCartItem);
 // console.log(dataCartItem);
@@ -158,29 +158,8 @@ function cartItemUI() {
      <img src="../img/empty-cart.png" alt="empty cart">
   </span>
   `)
-    : (cartCategory.innerHTML = getbyID(listDatas, cartData).map((item) => {
+    : (tbodyCart.innerHTML = getbyID(listDatas, cartData).map((item) => {
         return `
-        <table>
-        <thead>
-          <tr>
-            <th>Product Name</th>
-          </tr>
-          <tr>
-            <th>Quantity</th>
-          </tr>
-          <tr>
-            <th>Subtotal</th>
-          </tr>
-          <tr>
-            <th>Total</th>
-          </tr>
-          <tr>
-            <th>Clear Cart</th>
-          </tr>
-        </thead>
-  
-
-        <tbody>
                             <td class="cart__productName">
                               <span class="cart__productName-img">
                                 <img src="${item.productImg}" alt="" />
@@ -211,9 +190,7 @@ function cartItemUI() {
                               ></span>
                             </td>
                           </tr>
-                          </tbody>
-                          </table>
-                     
+              
         `;
       }));
 }
