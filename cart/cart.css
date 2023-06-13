@@ -1,7 +1,7 @@
 .cart__category {
   width: 100%;
   padding: 0 30px;
-  margin-top: 140px;
+  margin-top: 68px;
 }
 
 table {
@@ -29,8 +29,8 @@ thead tr:nth-child(5) {
   width: 20%;
 }
 .container {
-  margin-bottom: 50px;
-  scroll-behavior: smooth;
+  /* margin-bottom: 50px; */
+  /* scroll-behavior: smooth; */
 }
 
 .cart__content {
@@ -40,6 +40,7 @@ thead tr:nth-child(5) {
   /* padding-bottom: 30px; */
   border-bottom: 1px solid #ddd;
   margin: 0 65px 0 65px;
+  position: relative;
 }
 
 .cart__productName {
@@ -208,4 +209,167 @@ thead tr:nth-child(5) {
   justify-items: center;
   align-items: center;
   text-align: center;
+}
+/* Bills */
+.bills {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: #ddd;
+  display: none;
+  transition: all ease 0.3s;
+}
+
+.bills__container {
+  width: 780px;
+  min-height: 200px;
+  background-color: #fff;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 5px;
+}
+
+.bills__container-header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+}
+
+.bills__container-header h1 {
+  font-size: 25px;
+  padding-bottom: 20px;
+}
+
+.bills__container-header .close {
+  font-size: 24px;
+  cursor: pointer;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+.bills__container-header .close i:hover {
+  color: rgb(83, 79, 79);
+}
+
+.bills__form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2px;
+  margin: 20px 0;
+}
+
+.bills__form-header {
+  display: flex;
+}
+
+.bills__form-header p {
+  font-size: 16px;
+}
+/* .bills__form-header i {
+  font-size: 6px;
+  color: red;
+} */
+
+.start {
+  font-size: 6px;
+  color: red;
+}
+.bills__form-name {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bills__form-name input,
+.bills__form-email,
+.bills__form-phone {
+  width: 48%;
+  padding: 8px 6px;
+  border-radius: 3px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+.bills__form-email,
+.bills__form-phone {
+  width: 100%;
+  outline: none;
+}
+label {
+  font-size: 18px;
+  display: flex;
+}
+
+.bills__form-address {
+  display: flex;
+}
+.bills__form-addres p {
+  font-size: 16px;
+}
+
+.bills__form-select {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  column-gap: 10px;
+}
+
+.bills__form-select select {
+  width: 33%;
+  padding: 8px;
+  border-radius: 5px;
+  /* border: 1px solid black; */
+  outline: none;
+}
+
+.bills__name-house {
+  padding: 8px;
+  margin: 8px 0 12px 0;
+  border-radius: 5px;
+  outline: none;
+  font-size: 14px;
+}
+
+textarea {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.bills__form-btn {
+  display: flex;
+  justify-content: end;
+  margin-top: 20px;
+}
+
+.btn-cancel {
+  padding: 8px 15px;
+  background-color: rgb(208, 30, 30);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  margin-right: 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.btn-cancel:hover {
+  background-color: rgb(193, 32, 32);
+}
+
+.btn-confirm {
+  padding: 10px 16px;
+  background-color: #3194e0;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.btn-confirm:hover {
+  background-color: #2582ca;
 }

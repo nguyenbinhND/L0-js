@@ -89,9 +89,9 @@
             ></span>
           </div> -->
 
-            <span class="empty-cart">
+            <!-- <span class="empty-cart">
               <img src="../img/empty-cart.png" alt="empty cart" />
-            </span>
+            </span> -->
           </div>
         </div>
       </div>
@@ -105,6 +105,75 @@
         <div class="cart__category-total">
           <p class="total-price">Total: $20</p>
           <button class="btn btn-buy">Buy</button>
+        </div>
+      </div>
+
+      <div class="bills">
+        <div class="bills__container">
+          <div class="bills__container-header">
+            <h1>Thông tin người mua</h1>
+            <span class="close"><i class="fa-solid fa-xmark"></i></span>
+          </div>
+          <form action="" class="bills__form">
+            <div class="bills__form-header">
+              <p>Họ và Tên</p>
+              <span class="start"><i class="fa-solid fa-star"></i></span>
+            </div>
+            <div class="bills__form-name">
+              <input type="text" placeholder="Họ" />
+              <input type="text" placeholder="Tên" />
+            </div>
+            <label class="bills__form-emailLabel" for="email"
+              ><p>Email</p>
+              <span class="start"><i class="fa-solid fa-star"></i></span
+            ></label>
+
+            <input
+              id="email"
+              type="email"
+              placeholder="Email"
+              class="bills__form-email"
+            />
+            <label for="phone"
+              ><p>Số điện thoại</p>
+              <span class="start"><i class="fa-solid fa-star"></i></span
+            ></label>
+            <input
+              id="phone"
+              type="text"
+              placeholder="Số điện thoại"
+              class="bills__form-phone"
+            />
+            <span class="bills__form-address">
+              <p>Địa chỉ</p>
+              <span class="start"><i class="fa-solid fa-star"></i></span>
+            </span>
+
+            <div class="bills__form-select">
+              <select>
+                <option value="">--Chọn tỉnh/Thành phố</option>
+              </select>
+              <select>
+                <option value="">--Chọn huyện/Quận</option>
+              </select>
+              <select>
+                <option value="">--Chọn phường/Xã</option>
+              </select>
+            </div>
+            <input type="text" class="bills__name-house" placeholder="Số nhà" />
+            <label for="">Lời nhắn</label>
+            <textarea
+              name=""
+              id=""
+              cols="30"
+              rows="5"
+              placeholder="lời nhắn"
+            ></textarea>
+            <div class="btn bills__form-btn">
+              <button class="btn-cancel">Hủy</button>
+              <button class="btn-confirm">Xác nhận</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

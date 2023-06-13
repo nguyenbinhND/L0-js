@@ -16,10 +16,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 20px 30px;
-  position: fixed;
+  /* position: fixed;
   top: 0;
   left: 0;
-  z-index: 999;
+  z-index: 999; */
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
     rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 }
@@ -94,7 +94,7 @@
 .category {
   width: 100%;
   padding: 0 30px;
-  margin-top: 140px;
+  margin-top: 68px;
   display: flex;
   flex-wrap: wrap;
   row-gap: 30px;

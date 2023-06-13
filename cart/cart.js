@@ -5,10 +5,22 @@ var dataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
 var cartCategory = document.querySelector(".cart__category");
 var cartContent = document.querySelector(".cart__container");
 var totalPrice = document.querySelector(".total-price");
+const cartShop = document.querySelector(".cart__account");
 
 // console.log(listDataCartItem);
 // console.log(dataCartItem);
-console.log(totalPrice);
+
+function cart() {
+  arrList = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
+  let initialValue = 0;
+  const sumWithInitial = arrList.reduce(
+    (accumulator, currentValue) => accumulator + currentValue.count,
+    initialValue
+  );
+
+  cartShop.innerHTML = sumWithInitial;
+}
+cart();
 
 function getItemByID(listDataCartItem, dataCartItem) {
   const listNewdata = [];
@@ -28,7 +40,7 @@ function getItemByID(listDataCartItem, dataCartItem) {
       }
     }
   }
-  console.log(listNewdata);
+  // console.log(listNewdata);
   return listNewdata;
 }
 
@@ -36,6 +48,7 @@ var keyLocalStorageListSP = "DANHSACHSP";
 var keyLocalStorageItemCart = "DANHSACHITEMCART";
 let listDatas = JSON.parse(localStorage.getItem(keyLocalStorageListSP));
 let cartData = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
+let dataCart = getbyID(listDatas, cartData);
 
 function getbyID(datas, cart) {
   let listCart = [];
@@ -84,9 +97,13 @@ function cartItemUI() {
       </div>
 
       <div class="cart__quantity">
-        <span><i class="fa-solid fa-minus"></i></span>
+        <span onclick="minusItem(${
+          item.productId
+        })"><i class="fa-solid fa-minus"></i></span>
         <p>${item.productCount}</p>
-        <span><i class="fa-solid fa-plus"></i></span>
+        <span  onclick="plusItem(${
+          item.productId
+        })"><i class="fa-solid fa-plus"></i></span>
       </div>
 
       <div class="cart__sub">${item.productPrice}</div>
@@ -94,7 +111,7 @@ function cartItemUI() {
       <div class="cart__total">${item.productCount * item.productPrice}</div>
 
       <div>
-        <span class="cart__delete"
+        <span class="cart__delete" onclick="removeItem(${item.productId})"
           ><i class="fa-solid fa-circle-xmark"></i
         ></span>
       </div>
@@ -106,7 +123,6 @@ cartItemUI();
 
 function totalUi() {
   let listCartData = getbyID(listDatas, cartData);
-
   const initialValue = 0;
   const sumWithInitial = listCartData.reduce((accumulator, currentValue) => {
     return accumulator + currentValue.productPrice * currentValue.productCount;
@@ -116,9 +132,58 @@ function totalUi() {
 
 function totalCart() {
   let sum = totalUi();
-  console.log(sum);
   totalPrice.innerHTML = `
   Total: ${sum} $
   `;
 }
 totalCart();
+
+// remove Item
+function removeItem(id) {
+  for (let i = 0; i < dataCartItem.length; i++) {
+    if (dataCartItem[i].productId === Number(id)) {
+      dataCartItem.splice(i, 1);
+    }
+  }
+  localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(dataCartItem));
+  cartItemUI();
+  totalCart();
+}
+
+// them sp
+function plusItem(id) {
+  for (let i = 0; i < dataCartItem.length; i++) {
+    if (
+      dataCartItem[i].productId === Number(id) &&
+      dataCartItem[i].count < dataCart[i].productQuantity
+    ) {
+      dataCartItem[i].count += 1;
+    }
+  }
+  localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(dataCartItem));
+  cartItemUI();
+  totalCart();
+}
+// bot sp
+function minusItem(id) {
+  for (let i = 0; i < dataCartItem.length; i++) {
+    if (dataCartItem[i].productId === Number(id) && dataCartItem[i].count > 1) {
+      dataCartItem[i].count -= 1;
+    }
+  }
+  localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(dataCartItem));
+  cartItemUI();
+  totalCart();
+}
+
+// hide/noneHide bills
+var btnBuy = document.querySelector(".btn-buy");
+var bill = document.querySelector(".bills");
+var cancel = document.querySelector(".btn-cancel");
+
+btnBuy.addEventListener("click", () => {
+  bill.style.display = "block";
+});
+cancel.addEventListener("click", () => {
+  bill.style.display = "none";
+});
