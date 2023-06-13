@@ -46,9 +46,12 @@ function getItemByID(listDataCartItem, dataCartItem) {
 
 var keyLocalStorageListSP = "DANHSACHSP";
 var keyLocalStorageItemCart = "DANHSACHITEMCART";
-let listDatas = JSON.parse(localStorage.getItem(keyLocalStorageListSP));
-let cartData = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
-let dataCart = getbyID(listDatas, cartData);
+// let listDatas = JSON.parse(localStorage.getItem(keyLocalStorageListSP));
+// let cartData = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
+// let dataCart = getbyID(listDatas, cartData);
+let dataCart = getbyID(listDataCartItem, dataCartItem);
+var listDataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageListSP));
+var dataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
 
 function getbyID(datas, cart) {
   let listCart = [];
@@ -74,14 +77,15 @@ function getbyID(datas, cart) {
 }
 
 function cartItemUI() {
-  cartData.length === 0
+  dataCartItem.length === 0
     ? (cartContent.innerHTML = `  
      <span class="empty-cart">
      <img src="../img/empty-cart.png" alt="empty cart">
   </span>
   `)
-    : (cartContent.innerHTML = getbyID(listDatas, cartData).map((item) => {
-        return `
+    : (cartContent.innerHTML = getbyID(listDataCartItem, dataCartItem).map(
+        (item) => {
+          return `
         <div class="cart__content">
         <div class="cart__productName">
         <span class="cart__productName-img">
@@ -117,12 +121,13 @@ function cartItemUI() {
       </div>
       </div>
         `;
-      }));
+        }
+      ));
 }
 cartItemUI();
 
 function totalUi() {
-  let listCartData = getbyID(listDatas, cartData);
+  let listCartData = getbyID(listDataCartItem, dataCartItem);
   const initialValue = 0;
   const sumWithInitial = listCartData.reduce((accumulator, currentValue) => {
     return accumulator + currentValue.productPrice * currentValue.productCount;
