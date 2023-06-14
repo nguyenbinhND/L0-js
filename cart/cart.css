@@ -29,15 +29,12 @@ thead tr:nth-child(5) {
   width: 20%;
 }
 .container {
-  /* margin-bottom: 50px; */
-  /* scroll-behavior: smooth; */
 }
 
 .cart__content {
   display: flex;
   align-items: center;
   margin-top: 20px;
-  /* padding-bottom: 30px; */
   border-bottom: 1px solid #ddd;
   margin: 0 65px 0 65px;
   position: relative;
@@ -218,8 +215,8 @@ thead tr:nth-child(5) {
   right: 0;
   bottom: 0;
   width: 100%;
-  height: 100%;
-  background: #ddd;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
   display: none;
   transition: all ease 0.3s;
 }
@@ -228,8 +225,8 @@ thead tr:nth-child(5) {
   width: 780px;
   min-height: 200px;
   background-color: #fff;
-  margin: 40px auto;
-  padding: 30px;
+  margin: 25px auto;
+  padding: 25px;
   border-radius: 5px;
 }
 
@@ -260,7 +257,7 @@ thead tr:nth-child(5) {
   display: flex;
   flex-direction: column;
   row-gap: 2px;
-  margin: 20px 0;
+  margin: 10px 0;
 }
 
 .bills__form-header {
@@ -308,7 +305,7 @@ label {
 .bills__form-address {
   display: flex;
 }
-.bills__form-addres p {
+.bills__form-address p {
   font-size: 16px;
 }
 

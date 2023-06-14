@@ -182,9 +182,11 @@ function minusItem(id) {
 }
 
 // hide/noneHide bills
+
 var btnBuy = document.querySelector(".btn-buy");
 var bill = document.querySelector(".bills");
 var cancel = document.querySelector(".btn-cancel");
+var closeBills = document.querySelector(".close");
 
 btnBuy.addEventListener("click", () => {
   bill.style.display = "block";
@@ -192,3 +194,132 @@ btnBuy.addEventListener("click", () => {
 cancel.addEventListener("click", () => {
   bill.style.display = "none";
 });
+
+closeBills.addEventListener("click", () => {
+  bill.style.display = "none";
+});
+
+//bai 8  lay thong tin tinh-huyen--xa
+async function Provinces() {
+  var provinces = "https://provinces.open-api.vn/api/p/";
+  try {
+    let response = await fetch(provinces);
+    let data = response.json();
+    return data;
+  } catch (error) {
+    alert(" chua co thong tin du lieu");
+  }
+}
+
+// function lists() {
+//   var provinces = "https://provinces.open-api.vn/api/p/";
+//   try {
+//     fetch(provinces)
+//       .then((response) => response.json())
+//       .then((json) => {
+//         console.log(json);
+//         return json;
+//       });
+//   } catch (error) {
+//     alert(error);
+//   }
+// }
+
+// function Districts(districtCode) {
+//   var districts = `https://provinces.open-api.vn/api/d/${districtCode}`;
+//   try {
+//     fetch(districts)
+//       .then((response) => response.json())
+//       .then((json) => {
+//         return json;
+//       });
+//   } catch (error) {
+//     alert(error);
+//   }
+// }
+
+async function Districts() {
+  var districts = `https://provinces.open-api.vn/api/d/`;
+  try {
+    let response = await fetch(districts);
+    let data = response.json();
+
+    return data;
+  } catch (error) {
+    alert(error);
+  }
+}
+
+// function Wards() {
+//   var wards = `https://provinces.open-api.vn/api/w/`;
+//   try {
+//     fetch(wards)
+//       .then((response) => response.json())
+//       .then((json) => {
+//         return json;
+//       });
+//   } catch (error) {
+//     alert(error);
+//   }
+// }
+
+async function Wards() {
+  var wards = `https://provinces.open-api.vn/api/w/`;
+  try {
+    let response = await fetch(wards);
+    let data = response.json();
+
+    return data;
+  } catch (error) {
+    alert(error);
+  }
+}
+
+// bai 9 ASync/await
+async function listProvinces() {
+  let province = document.querySelector(".province");
+  let data = await Provinces();
+  if (data && data.length > 0) {
+    data.map((city) => {
+      let options = `<option value="${city.code}">${city.name}</option>`;
+      province.insertAdjacentHTML("beforeend", options);
+    });
+  }
+}
+listProvinces();
+
+async function listDistricts() {
+  let province = document.querySelector(".province");
+  let listDistricts = document.querySelector(".districts");
+  let data = await Districts();
+  province.addEventListener("change", (e) => {
+    if (data && data.length > 0) {
+      data.map((districts) => {
+        if (districts.province_code === Number(e.target.value)) {
+          let options = `<option value="${districts.code}">${districts.name}</option>`;
+          listDistricts.insertAdjacentHTML("beforeend", options);
+        }
+      });
+    }
+  });
+}
+listDistricts();
+
+async function listWards() {
+  let listDistricts = document.querySelector(".districts");
+  let listWards = document.querySelector(".wards");
+  let data = await Wards();
+  console.log(data);
+  listDistricts.addEventListener("change", (e) => {
+    if (data && data.length > 0) {
+      data.map((ward) => {
+        if (ward.district_code === Number(e.target.value)) {
+          let options = `<option value="${ward.code}">${ward.name}</option>`;
+          listWards.insertAdjacentHTML("beforeend", options);
+        }
+      });
+    }
+  });
+}
+
+listWards();
