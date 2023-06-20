@@ -103,7 +103,7 @@
           </button>
         </a>
         <div class="cart__category-total">
-          <p class="total-price">Total: $20</p>
+          <p class="total-price">Total: $0</p>
           <button class="btn btn-buy">Buy</button>
         </div>
       </div>
@@ -120,30 +120,34 @@
               <span class="start"><i class="fa-solid fa-star"></i></span>
             </div>
             <div class="bills__form-name">
-              <input type="text" placeholder="Họ" />
-              <input type="text" placeholder="Tên" />
+              <input type="text" placeholder="Họ" class="input__fname" />
+              <input type="text" placeholder="Tên" class="input__lname" />
+              <span class="errorName"></span>
             </div>
             <label class="bills__form-emailLabel" for="email"
               ><p>Email</p>
               <span class="start"><i class="fa-solid fa-star"></i></span
             ></label>
-
             <input
               id="email"
               type="email"
               placeholder="Email"
               class="bills__form-email"
             />
+            <span class="errorEmail"></span>
+
             <label for="phone"
               ><p>Số điện thoại</p>
               <span class="start"><i class="fa-solid fa-star"></i></span
             ></label>
             <input
               id="phone"
-              type="text"
+              type="number"
               placeholder="Số điện thoại"
               class="bills__form-phone"
             />
+            <span class="errorPhone"></span>
+
             <span class="bills__form-address">
               <p>Địa chỉ</p>
               <span class="start"><i class="fa-solid fa-star"></i></span>
@@ -159,8 +163,11 @@
               <select class="wards">
                 <option value="">--Chọn phường/Xã</option>
               </select>
+              <span class="errorSelect"></span>
             </div>
             <input type="text" class="bills__name-house" placeholder="Số nhà" />
+            <span class="errorHouse"></span>
+
             <label for="">Lời nhắn</label>
             <textarea
               name=""
@@ -168,6 +175,7 @@
               cols="30"
               rows="3"
               placeholder="lời nhắn"
+              class="mess"
             ></textarea>
             <div class="btn bills__form-btn">
               <button class="btn-cancel">Hủy</button>

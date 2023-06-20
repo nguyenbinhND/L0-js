@@ -5,10 +5,8 @@ var dataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
 var cartCategory = document.querySelector(".cart__category");
 var cartContent = document.querySelector(".cart__container");
 var totalPrice = document.querySelector(".total-price");
-const cartShop = document.querySelector(".cart__account");
-
-// console.log(listDataCartItem);
-// console.log(dataCartItem);
+var cartShop = document.querySelector(".cart__account");
+var hideBtnBuy = document.querySelector(".cart__category-total");
 
 function cart() {
   arrList = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
@@ -17,10 +15,16 @@ function cart() {
     (accumulator, currentValue) => accumulator + currentValue.count,
     initialValue
   );
-
   cartShop.innerHTML = sumWithInitial;
+  return sumWithInitial;
 }
 cart();
+
+function hideBuy() {
+  if (cart() == 0) {
+    hideBtnBuy.style.display = "none";
+  } else hideBtnBuy.style.display = "block";
+}
 
 function getItemByID(listDataCartItem, dataCartItem) {
   const listNewdata = [];
@@ -40,15 +44,12 @@ function getItemByID(listDataCartItem, dataCartItem) {
       }
     }
   }
-  // console.log(listNewdata);
+
   return listNewdata;
 }
 
 var keyLocalStorageListSP = "DANHSACHSP";
 var keyLocalStorageItemCart = "DANHSACHITEMCART";
-// let listDatas = JSON.parse(localStorage.getItem(keyLocalStorageListSP));
-// let cartData = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
-// let dataCart = getbyID(listDatas, cartData);
 let dataCart = getbyID(listDataCartItem, dataCartItem);
 var listDataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageListSP));
 var dataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
@@ -81,7 +82,7 @@ function cartItemUI() {
     ? (cartContent.innerHTML = `  
      <span class="empty-cart">
      <img src="../img/empty-cart.png" alt="empty cart">
-  </span>
+  </span> 
   `)
     : (cartContent.innerHTML = getbyID(listDataCartItem, dataCartItem).map(
         (item) => {
@@ -110,9 +111,9 @@ function cartItemUI() {
         })"><i class="fa-solid fa-plus"></i></span>
       </div>
 
-      <div class="cart__sub">${item.productPrice}</div>
+      <div class="cart__sub">${item.productPrice}$</div>
 
-      <div class="cart__total">${item.productCount * item.productPrice}</div>
+      <div class="cart__total">${item.productCount * item.productPrice}$</div>
 
       <div>
         <span class="cart__delete" onclick="removeItem(${item.productId})"
@@ -153,6 +154,8 @@ function removeItem(id) {
   localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(dataCartItem));
   cartItemUI();
   totalCart();
+  cart();
+  hideBuy();
 }
 
 // them sp
@@ -181,23 +184,9 @@ function minusItem(id) {
   totalCart();
 }
 
-// hide/noneHide bills
-
-var btnBuy = document.querySelector(".btn-buy");
-var bill = document.querySelector(".bills");
-var cancel = document.querySelector(".btn-cancel");
-var closeBills = document.querySelector(".close");
-
-btnBuy.addEventListener("click", () => {
-  bill.style.display = "block";
-});
-cancel.addEventListener("click", () => {
-  bill.style.display = "none";
-});
-
-closeBills.addEventListener("click", () => {
-  bill.style.display = "none";
-});
+function hideBtnBuy() {
+  hideBtnBuy.style.display = "none";
+}
 
 //bai 8  lay thong tin tinh-huyen--xa
 async function Provinces() {
@@ -211,33 +200,6 @@ async function Provinces() {
   }
 }
 
-// function lists() {
-//   var provinces = "https://provinces.open-api.vn/api/p/";
-//   try {
-//     fetch(provinces)
-//       .then((response) => response.json())
-//       .then((json) => {
-//         console.log(json);
-//         return json;
-//       });
-//   } catch (error) {
-//     alert(error);
-//   }
-// }
-
-// function Districts(districtCode) {
-//   var districts = `https://provinces.open-api.vn/api/d/${districtCode}`;
-//   try {
-//     fetch(districts)
-//       .then((response) => response.json())
-//       .then((json) => {
-//         return json;
-//       });
-//   } catch (error) {
-//     alert(error);
-//   }
-// }
-
 async function Districts() {
   var districts = `https://provinces.open-api.vn/api/d/`;
   try {
@@ -249,19 +211,6 @@ async function Districts() {
     alert(error);
   }
 }
-
-// function Wards() {
-//   var wards = `https://provinces.open-api.vn/api/w/`;
-//   try {
-//     fetch(wards)
-//       .then((response) => response.json())
-//       .then((json) => {
-//         return json;
-//       });
-//   } catch (error) {
-//     alert(error);
-//   }
-// }
 
 async function Wards() {
   var wards = `https://provinces.open-api.vn/api/w/`;
@@ -275,7 +224,7 @@ async function Wards() {
   }
 }
 
-// bai 9 ASync/await
+// bai 9 ASync/await   listProvinces
 async function listProvinces() {
   let province = document.querySelector(".province");
   let data = await Provinces();
@@ -309,7 +258,7 @@ async function listWards() {
   let listDistricts = document.querySelector(".districts");
   let listWards = document.querySelector(".wards");
   let data = await Wards();
-  console.log(data);
+
   listDistricts.addEventListener("change", (e) => {
     if (data && data.length > 0) {
       data.map((ward) => {
@@ -323,3 +272,147 @@ async function listWards() {
 }
 
 listWards();
+
+// cau 10
+// var customerList = {
+//   id: randomId(),
+//   name: `${fname.value}`,
+// };
+function randomId() {
+  let randomId = Math.floor(Math.random() * 1000) + 1;
+  return randomId;
+}
+
+function getDate() {
+  let date = new Date();
+  let dateNow = ` ${date.getDay()}/${
+    date.getMonth() + 1
+  }/${date.getFullYear()} `;
+
+  return dateNow;
+}
+
+// cau 11 validate
+var form = document.querySelector(".bills__form");
+var errorInput = document.querySelectorAll(".error");
+
+var fname = document.querySelector(".input__fname");
+var lname = document.querySelector(".input__lname");
+var email = document.querySelector(".bills__form-email");
+var phone = document.querySelector(".bills__form-phone");
+var address = document.querySelector(".bills__name-house");
+var province = document.querySelector(".province");
+var districts = document.querySelector(".districts");
+var wards = document.querySelector(".wards");
+var mess = document.querySelector("mess");
+
+function showError(input, mess) {
+  input.innerHTML = mess;
+}
+
+function showSuccess(input) {
+  input.innerHTML = "";
+}
+
+// Check email is valid
+function checkEmail(input, err) {
+  const re =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  if (re.test(input.value.trim())) {
+    showSuccess(input);
+  } else {
+    showError(err, "Email is not valid");
+  }
+}
+
+// check submit form
+
+function checkError(fname, lname, email, phone, address) {
+  let errorName = document.querySelector(".errorName");
+  let errorEmail = document.querySelector(".errorEmail");
+  let errorPhone = document.querySelector(".errorPhone");
+  let errorHouse = document.querySelector(".errorHouse");
+  let errorSelect = document.querySelector(".errorSelect");
+
+  if ((fname.value.trim() == "") | (lname.value.trim() == "")) {
+    showError(errorName, "không được để trống họ hoặc tên");
+  } else {
+    showSuccess(errorName);
+  }
+
+  if (email.value.trim() == "") {
+    showError(errorEmail, "Không được để trống email");
+  } else {
+    showSuccess(errorEmail);
+    checkEmail(email, errorEmail);
+  }
+  if (phone.value.trim() == "") {
+    showError(errorPhone, "Không được để trống số điện thoại");
+  } else {
+    showSuccess(errorPhone);
+  }
+  if (province.value == "") {
+    showError(errorSelect, "Không được để trống thành phố");
+  } else if (districts.value == "") {
+    showError(errorSelect, "Không được để trống quận");
+  } else if (wards.value == "") {
+    showError(errorSelect, "Không được để trống xã");
+  } else {
+    showSuccess(errorSelect);
+  }
+  if (address.value.trim() == "") {
+    showError(errorHouse, "không được để trống địa chỉ");
+  } else {
+    showSuccess(errorHouse);
+  }
+}
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  checkError(fname, lname, email, phone, address);
+});
+
+// hide/noneHide bills
+
+var btnBuy = document.querySelector(".btn-buy");
+var bill = document.querySelector(".bills");
+var cancel = document.querySelector(".btn-cancel");
+var closeBills = document.querySelector(".close");
+
+btnBuy.addEventListener("click", () => {
+  bill.style.display = "block";
+});
+cancel.addEventListener("click", () => {
+  bill.style.display = "none";
+  fname.value = "";
+  lname.value = "";
+  email.value = "";
+  phone.value = "";
+  address.value = "";
+  mess.value = "";
+});
+
+closeBills.addEventListener("click", () => {
+  var errorName = document.querySelector(".errorName");
+  var errorEmail = document.querySelector(".errorEmail");
+  bill.style.display = "none";
+  fname.value = "";
+  lname.value = "";
+  email.value = "";
+  phone.value = "";
+  address.value = "";
+  mess.value = "";
+  showSuccess(errorName);
+  showSuccess(errorEmail);
+});
+
+var customerList = {
+  id: randomId(),
+  dateNow: getDate(),
+  name: `${fname.value} ${lname.value}`,
+  email: email.value,
+  address: `${province.value}-${districts.value}-${wards.value}`,
+  numberHouse: address.value,
+  mess: mess.value,
+};

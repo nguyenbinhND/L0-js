@@ -132,6 +132,13 @@ thead tr:nth-child(5) {
   flex-direction: column;
   row-gap: 20px;
 }
+.total-price {
+  /* padding: 10px 0; */
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 18px;
+  border-bottom: 1px solid crimson;
+}
 
 .btn-buy {
   padding: 10px 14px;
@@ -146,13 +153,13 @@ thead tr:nth-child(5) {
   background-color: rgb(6, 110, 6);
 }
 
-.empty-cart {
+/* .empty-cart {
   display: block;
-  height: 350px;
+  height: 280px;
   justify-items: center;
   align-items: center;
   text-align: center;
-}
+} */
 
 .cart__category-footer {
   width: 100%;
@@ -202,7 +209,7 @@ thead tr:nth-child(5) {
 .empty-cart {
   display: block;
   width: 100%;
-  height: 350px;
+  height: 300px;
   justify-items: center;
   align-items: center;
   text-align: center;
@@ -225,8 +232,8 @@ thead tr:nth-child(5) {
   width: 780px;
   min-height: 200px;
   background-color: #fff;
-  margin: 25px auto;
-  padding: 25px;
+  margin: 18px auto;
+  padding: 5px 25px;
   border-radius: 5px;
 }
 
@@ -240,14 +247,14 @@ thead tr:nth-child(5) {
 
 .bills__container-header h1 {
   font-size: 25px;
-  padding-bottom: 20px;
+  /* padding-bottom: 20px; */
 }
 
 .bills__container-header .close {
   font-size: 24px;
   cursor: pointer;
   padding: 5px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 .bills__container-header .close i:hover {
   color: rgb(83, 79, 79);
@@ -278,9 +285,11 @@ thead tr:nth-child(5) {
 }
 .bills__form-name {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
   align-items: center;
   justify-content: space-between;
+  /* margin-bottom: 16px; */
 }
 
 .bills__form-name input,
@@ -289,9 +298,10 @@ thead tr:nth-child(5) {
   width: 48%;
   padding: 8px 6px;
   border-radius: 3px;
-  margin-bottom: 16px;
+  /* margin-bottom: 16px; */
   font-size: 14px;
 }
+
 .bills__form-email,
 .bills__form-phone {
   width: 100%;
@@ -300,10 +310,12 @@ thead tr:nth-child(5) {
 label {
   font-size: 18px;
   display: flex;
+  margin-top: 5px;
 }
 
 .bills__form-address {
   display: flex;
+  margin-top: 10px;
 }
 .bills__form-address p {
   font-size: 16px;
@@ -312,13 +324,14 @@ label {
 .bills__form-select {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
   column-gap: 10px;
 }
 
 .bills__form-select select {
-  width: 33%;
+  width: 32%;
   padding: 8px;
   border-radius: 5px;
   /* border: 1px solid black; */
@@ -327,7 +340,7 @@ label {
 
 .bills__name-house {
   padding: 8px;
-  margin: 8px 0 12px 0;
+  /* margin: 8px 0 12px 0; */
   border-radius: 5px;
   outline: none;
   font-size: 14px;
@@ -369,4 +382,15 @@ textarea {
 }
 .btn-confirm:hover {
   background-color: #2582ca;
+}
+
+.errorName,
+.errorEmail,
+.errorPhone,
+.errorHouse,
+.errorSelect {
+  /* display: none; */
+  width: 100%;
+  padding-top: 2px;
+  color: #e74c3c;
 }
