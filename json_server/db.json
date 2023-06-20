@@ -1,0 +1,110 @@
+{
+  "DANHSACHDONHANG": [
+    {
+      "idUser": 635,
+      "fullName": "qw as",
+      "address": "33 Xã Yên Mỹ Huyện Lạng Giang Tỉnh Bắc Giang",
+      "email": "asf@g.com",
+      "phone": "0958275991",
+      "buyTime": "6-4-2023",
+      "itemNumber": 1,
+      "totalQuantity": 2,
+      "totalPrice": 4600000,
+      "cart": [
+        {
+          "idSP": 4,
+          "soLuong": 2
+        }
+      ],
+      "id": 4
+    },
+    {
+      "idUser": 135,
+      "fullName": "aaa aa",
+      "address": "ss 55 Phường Trần Hưng Đạo Thành phố Hạ Long Tỉnh Quảng Ninh",
+      "email": "ffasd@gmail.com",
+      "phone": "0987654321",
+      "buyTime": "11-4-2023",
+      "itemNumber": 2,
+      "totalQuantity": 7,
+      "totalPrice": 20900000,
+      "cart": [
+        {
+          "idSP": 4,
+          "soLuong": 3
+        },
+        {
+          "idSP": 3,
+          "soLuong": 4
+        }
+      ],
+      "id": 5
+    },
+    {
+      "idUser": 197,
+      "fullName": "aaff afg",
+      "address": "22 Phường Bắc Sơn Thành phố Uông Bí Tỉnh Quảng Ninh",
+      "email": "aga@g.com",
+      "phone": "0987654321",
+      "buyTime": "11-4-2023",
+      "itemNumber": 3,
+      "totalQuantity": 4,
+      "totalPrice": 11200000,
+      "cart": [
+        {
+          "idSP": 4,
+          "soLuong": 1
+        },
+        {
+          "idSP": 3,
+          "soLuong": 2
+        },
+        {
+          "idSP": 8,
+          "soLuong": 1
+        }
+      ],
+      "id": 6
+    },
+    {
+      "idUser": 424,
+      "fullName": "cjk kch",
+      "address": "22 Phường Trà Cổ Thành phố Móng Cái Tỉnh Quảng Ninh",
+      "email": "cjo22@jd.com",
+      "phone": "0987654321",
+      "buyTime": "11-4-2023",
+      "itemNumber": 1,
+      "totalQuantity": 4,
+      "totalPrice": 9200000,
+      "cart": [
+        {
+          "idSP": 4,
+          "soLuong": 4
+        }
+      ],
+      "id": 7
+    },
+    {
+      "idUser": 271,
+      "fullName": "tran fffa",
+      "address": "qiifo Xã Việt Ngọc Huyện Tân Yên Tỉnh Bắc Giang",
+      "email": "41@ac.c",
+      "phone": "0987654321",
+      "buyTime": "17-4-2023",
+      "itemNumber": 2,
+      "totalQuantity": 3,
+      "totalPrice": 11300000,
+      "cart": [
+        {
+          "idSP": 3,
+          "soLuong": 1
+        },
+        {
+          "idSP": 2,
+          "soLuong": 2
+        }
+      ],
+      "id": 8
+    }
+  ]
+}
