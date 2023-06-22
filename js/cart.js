@@ -8,17 +8,37 @@ var totalPrice = document.querySelector(".total-price");
 var cartShop = document.querySelector(".cart__account");
 var hideBtnBuy = document.querySelector(".cart__category-total");
 // http://localhost:3000/DANHSACHDONHANG
+
 function cart() {
   let arrList = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
   let initialValue = 0;
-  const sumWithInitial = arrList.reduce(
-    (accumulator, currentValue) => accumulator + currentValue.count,
-    initialValue
-  );
-  cartShop.innerHTML = sumWithInitial;
-  return sumWithInitial;
+  let sumWithInitial;
+  if (arrList?.length > 0) {
+    sumWithInitial = arrList.reduce(
+      (accumulator, currentValue) => accumulator + currentValue.count,
+      initialValue
+    );
+    cartShop.innerHTML = sumWithInitial;
+    return sumWithInitial;
+  } else {
+    sumWithInitial = initialValue;
+    hideBtnBuy.style.display = "none";
+  }
+  // const sumWithInitial = arrList.reduce(
+  //   (accumulator, currentValue) => accumulator + currentValue.count,
+  //   initialValue
+  // );
+
+  // cartShop.innerHTML = sumWithInitial;
+  // return sumWithInitial;
 }
 cart();
+
+// function hideBuy() {
+//   if (cart() == 0) {
+//     hideBtnBuy.style.display = "none";
+//   } else hideBtnBuy.style.display = "block";
+// }
 
 function hideBuy() {
   if (cart() == 0) {
@@ -113,7 +133,9 @@ function cartItemUI() {
 
       <div class="cart__sub">${item.productPrice}$</div>
 
-      <div class="cart__total">${item.productCount * item.productPrice}$</div>
+      <div class="cart__total">${
+        Math.round(item.productCount * item.productPrice * 100) / 100
+      }$</div>
 
       <div>
         <span class="cart__delete" onclick="removeItem(${item.productId})"
@@ -133,7 +155,7 @@ function totalUi() {
   const sumWithInitial = listCartData.reduce((accumulator, currentValue) => {
     return accumulator + currentValue.productPrice * currentValue.productCount;
   }, initialValue);
-  return sumWithInitial;
+  return Math.round(sumWithInitial * 100) / 100;
 }
 
 function totalCart() {
@@ -152,10 +174,10 @@ function removeItem(id) {
     }
   }
   localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(dataCartItem));
+
   cartItemUI();
   totalCart();
   cart();
-  hideBuy();
 }
 
 // them sp
@@ -274,40 +296,30 @@ async function listWards() {
 listWards();
 
 // cau 10
-// var customerList = {
-//   id: randomId(),
-//   name: `${fname.value}`,
-// };
-const apiUrl = "http://localhost:3000/DANHSACHDONHANG";
 
-// const getDataCustomer = async () => {
-//   const response = await fetch(apiUrl);
-//   const customerData = await response.json();
-//   console.log(customerData);
-//   return customerData;
-// };
-// getDataCustomer();
+// const apiUrl = "http://localhost:3000/DANHSACHDONHANG";
 
 async function randomId() {
-  let randomId = Math.floor(Math.random() * 10000) + 1;
-  let dataOrder = await listCustomer.getDataCustomer();
+  let randomUserID = Math.floor(Math.random() * 10000) + 1;
+  let dataOrder = await listCustomer().getDataCustomer();
   for (let i = 0; i < dataOrder.length; i++) {
-    if (dataOrder[i].idUser === randomId) {
+    if (dataOrder[i].idUser === randomUserID) {
       randomId();
     }
-    return randomId;
   }
-  console.log(dataOrder);
+  console.log(randomUserID);
+  return randomUserID;
 }
-randomId();
 
 function getDate() {
-  let date = new Date();
-  let dateNow = ` ${date.getDay()}/${
-    date.getMonth() + 1
-  }/${date.getFullYear()} `;
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, "0");
+  var mm = String(today.getMonth() + 1).padStart(2, "0");
+  var yyyy = today.getFullYear();
 
-  return dateNow;
+  today = mm + "/" + dd + "/" + yyyy;
+
+  return today;
 }
 
 // cau 11 validate
@@ -402,13 +414,21 @@ btnBuy.addEventListener("click", () => {
   bill.style.display = "block";
 });
 cancel.addEventListener("click", () => {
+  let errorName = document.querySelector(".errorName");
+  let errorEmail = document.querySelector(".errorEmail");
+  let errorPhone = document.querySelector(".errorPhone");
+  let errorHouse = document.querySelector(".errorHouse");
+  let errorSelect = document.querySelector(".errorSelect");
+  // let errorSelect = document.querySelector(".errorSelect");
   bill.style.display = "none";
   fname.value = "";
   lname.value = "";
   email.value = "";
   phone.value = "";
   address.value = "";
-  mess.value = "";
+  // mess.value = "";
+
+  showSuccess(errorName, errorEmail, errorPhone, errorHouse, errorSelect);
 });
 
 closeBills.addEventListener("click", () => {
@@ -420,17 +440,77 @@ closeBills.addEventListener("click", () => {
   email.value = "";
   phone.value = "";
   address.value = "";
-  mess.value = "";
+  // mess.value = "";
   showSuccess(errorName);
   showSuccess(errorEmail);
 });
 
-// var customerList = {
-//   id: randomId(),
-//   dateNow: getDate(),
-//   name: `${fname.value} ${lname.value}`,
-//   email: email.value,
-//   address: `${province.value}-${districts.value}-${wards.value}`,
-//   numberHouse: address.value,
-//   mess: mess.value,
-// };
+// cau 15
+
+function errorLength() {
+  let errorName = document.querySelector(".errorName").innerHTML;
+  let errorEmail = document.querySelector(".errorEmail").innerHTML;
+  let errorPhone = document.querySelector(".errorPhone").innerHTML;
+  let errorHouse = document.querySelector(".errorHouse").innerHTML;
+  let errorSelect = document.querySelector(".errorSelect").innerHTML;
+  return (
+    errorName.length +
+    errorEmail.length +
+    errorPhone.length +
+    errorHouse.length +
+    errorSelect.length
+  );
+}
+console.log({ address });
+const confirmBuy = document.querySelector(".btn-confirm");
+confirmBuy.addEventListener("click", async () => {
+  checkError(fname, lname, email, phone, address);
+  if (errorLength() === 0) {
+    let customer = {
+      idUser: await randomId(),
+      fullName: `${fname.value} ${lname.value}`,
+      address: `${address.value} ${wards.options[wards.selectedIndex].text} ${
+        districts.options[districts.selectedIndex].text
+      } ${province.options[province.selectedIndex].text}`,
+      email: email.value,
+      phone: phone.value,
+      buyTime: getDate(),
+      itemNumber: dataCartItem.length,
+      totalQuantity: cart(),
+      totalPrice: totalUi(),
+      cart: dataCartItem,
+    };
+    console.log(customer);
+    listCustomer().postDataCustomer(customer);
+    alert("thêm sản phẩm thành công");
+    let arr = [];
+    localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(arr));
+    cartItemUI();
+    hideBuy();
+  }
+});
+
+function refreshQuantity() {
+  // listDataCartItem
+  let newListProducts = [];
+  for (let i = 0; i < listDataCartItem.length; i++) {
+    for (let j = 0; j < dataCartItem.length; j++) {
+      if (listDataCartItem.id === dataCartItem.productId) {
+        [
+          ...listDataCartItem,
+          {
+            id: listDataCartItem.id,
+            name: listDataCartItem.name,
+            img: listDataCartItem.img,
+            price: listDataCartItem.price,
+            soLuong: listDataCartItem.soLuong - dataCartItem.count,
+          },
+        ];
+      }
+    }
+  }
+  localStorage.setItem(
+    keyLocalStorageItemCart,
+    JSON.stringify(listDataCartItem)
+  );
+}
