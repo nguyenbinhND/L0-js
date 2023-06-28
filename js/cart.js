@@ -180,30 +180,78 @@ function removeItem(id) {
   cart();
 }
 
+// dataCart[i].productQuantity
+
 // them sp
+// function plusItem(id) {
+//   for (let i = 0; i < dataCartItem.length; i++) {
+//     if (
+//       dataCartItem[i].productId === Number(id) &&
+//       dataCartItem[i].count < listDataCartItem[i].soLuong
+//     ) {
+//       dataCartItem[i].count += 1;
+//       let minus = "minus";
+//       refreshQuantity(minus);
+//     }
+//   }
+//   cartItemUI();
+//   totalCart();
+// }
+// bot sp
+// function minusItem(id) {
+//   for (let i = 0; i < dataCartItem.length; i++) {
+//     if (dataCartItem[i].productId === Number(id) && dataCartItem[i].count > 1) {
+//       let plus = "plus";
+//       dataCartItem[i].count -= 1;
+//       refreshQuantity(plus);
+//     }
+//   }
+
+//   cartItemUI();
+//   totalCart();
+// }
+
 function plusItem(id) {
+  const itemTemp = listDataCartItem.find((a) => a.id === Number(id));
   for (let i = 0; i < dataCartItem.length; i++) {
     if (
       dataCartItem[i].productId === Number(id) &&
-      dataCartItem[i].count < dataCart[i].productQuantity
+      dataCartItem[i].count < itemTemp.soLuong
     ) {
       dataCartItem[i].count += 1;
     }
-  }
-  localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(dataCartItem));
-  cartItemUI();
-  totalCart();
-}
-// bot sp
-function minusItem(id) {
-  for (let i = 0; i < dataCartItem.length; i++) {
-    if (dataCartItem[i].productId === Number(id) && dataCartItem[i].count > 1) {
-      dataCartItem[i].count -= 1;
+    if (
+      dataCartItem[i].productId == Number(id) &&
+      dataCartItem[i].count > itemTemp.soLuong
+    ) {
+      alert("Sản phẩm trong kho đã đạt giới hạn");
     }
   }
   localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(dataCartItem));
   cartItemUI();
   totalCart();
+  cart();
+}
+
+function minusItem(id) {
+  let dataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
+  for (let i = 0; i < dataCartItem.length; i++) {
+    if (dataCartItem[i].productId === Number(id) && dataCartItem[i].count > 0) {
+      dataCartItem[i].count -= 1;
+    }
+    if (dataCartItem[i].count === 0) {
+      if (confirm("Bạn muốn xóa sản phẩm?") === true) {
+        dataCartItem.splice(i, 1);
+      } else {
+        dataCartItem[i].count = 1;
+      }
+    }
+  }
+  localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(dataCartItem));
+  cartItemUI();
+  totalCart();
+  cartItemUI();
+  cart();
 }
 
 // function hideBtnBuy() {
@@ -461,7 +509,7 @@ function errorLength() {
     errorSelect.length
   );
 }
-console.log({ address });
+// console.log({ address });
 const confirmBuy = document.querySelector(".btn-confirm");
 confirmBuy.addEventListener("click", async () => {
   checkError(fname, lname, email, phone, address);
@@ -490,27 +538,85 @@ confirmBuy.addEventListener("click", async () => {
   }
 });
 
-function refreshQuantity() {
+// cập nhật số lượng sản phẩm sau khi order
+function refreshQuantity(type) {
   // listDataCartItem
-  let newListProducts = [];
-  for (let i = 0; i < listDataCartItem.length; i++) {
-    for (let j = 0; j < dataCartItem.length; j++) {
-      if (listDataCartItem.id === dataCartItem.productId) {
-        [
-          ...listDataCartItem,
-          {
-            id: listDataCartItem.id,
-            name: listDataCartItem.name,
-            img: listDataCartItem.img,
-            price: listDataCartItem.price,
-            soLuong: listDataCartItem.soLuong - dataCartItem.count,
-          },
-        ];
+  let newListProducts = [...listDataCartItem];
+  // for (let j = 0; j < dataCartItem.length; j++) {
+  //   for (let i = 0; i < listDataCartItem.length; i++) {
+  //     if (
+  //       listDataCartItem[i].id === dataCartItem[j].productId &&
+  //       listDataCartItem[i].soLuong > 1
+  //     ) {
+  //       let newItem = {
+  //         id: listDataCartItem[i].id,
+  //         name: listDataCartItem[i].name,
+  //         img: listDataCartItem[i].img,
+  //         price: listDataCartItem[i].price,
+  //         soLuong: Number(listDataCartItem[i].soLuong - dataCartItem[j].count),
+  //       };
+  //       newListProducts[i] = newItem;
+  //     }
+  //   }
+  // }
+  // console.log(newListProducts);
+  // localStorage.setItem(keyLocalStorageListSP, JSON.stringify(newListProducts));
+
+  switch (type) {
+    case "plus":
+      for (let j = 0; j < dataCartItem.length; j++) {
+        for (let i = 0; i < listDataCartItem.length; i++) {
+          if (listDataCartItem[i].id === dataCartItem[j].productId) {
+            let newItem = {
+              id: listDataCartItem[i].id,
+              name: listDataCartItem[i].name,
+              img: listDataCartItem[i].img,
+              price: listDataCartItem[i].price,
+              soLuong: Number(
+                // listDataCartItem[i].soLuong + dataCartItem[j].count
+                listDataCartItem[i].soLuong + 1
+              ),
+            };
+            newListProducts[i] = newItem;
+          }
+        }
       }
-    }
+      console.log(newListProducts);
+      localStorage.setItem(
+        keyLocalStorageListSP,
+        JSON.stringify(newListProducts)
+      );
+      break;
+    case "minus":
+      for (let j = 0; j < dataCartItem.length; j++) {
+        for (let i = 0; i < listDataCartItem.length; i++) {
+          if (
+            listDataCartItem[i].id === dataCartItem[j].productId &&
+            listDataCartItem[i].soLuong > 1
+          ) {
+            let newItem = {
+              id: listDataCartItem[i].id,
+              name: listDataCartItem[i].name,
+              img: listDataCartItem[i].img,
+              price: listDataCartItem[i].price,
+              soLuong: Number(
+                // listDataCartItem[i].soLuong - dataCartItem[j].count
+                listDataCartItem[i].soLuong - 1
+              ),
+            };
+            newListProducts[i] = newItem;
+          }
+        }
+      }
+      console.log(newListProducts);
+      localStorage.setItem(
+        keyLocalStorageListSP,
+        JSON.stringify(newListProducts)
+      );
+      break;
+
+    default:
+      console.log("loi refresh");
+      break;
   }
-  localStorage.setItem(
-    keyLocalStorageItemCart,
-    JSON.stringify(listDataCartItem)
-  );
 }

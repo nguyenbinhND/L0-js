@@ -1,0 +1,36 @@
+.cart__category {
+  width: 100%;
+  padding: 0 30px;
+  margin-top: 68px;
+}
+
+table {
+  width: 90%;
+  margin: auto;
+}
+
+.cart__category thead {
+  display: flex;
+  column-gap: 40px;
+  align-items: center;
+}
+thead {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+thead tr:nth-child(1) {
+  width: 10%;
+}
+thead tr:nth-child(2),
+thead tr:nth-child(3),
+/* thead tr:nth-child(4),
+thead tr:nth-child(5), */
+thead tr:nth-child(6),
+thead tr:nth-child(7) {
+  width: 15%;
+}
+thead tr:nth-child(4),
+thead tr:nth-child(5) {
+  width: 10%;
+}
