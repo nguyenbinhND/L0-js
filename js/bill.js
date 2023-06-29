@@ -43,9 +43,7 @@ async function getDataCustomer() {
       <p class="bill__content-price-total">$ ${customer.totalPrice}</p>
     </div>
     <div>
-      <span class="bill__delete " onclick="listCustomer().deleteCustomer(${
-        customer.id
-      })"
+      <span class="bill__delete " onclick="remove(${customer.id})"
         ><i class="fa-solid fa-circle-xmark"></i
       ></span>
     </div>
@@ -74,13 +72,11 @@ function data() {
 // bill detail
 let billDetail = document.querySelector(".bill__detail-content");
 const displayBillDetail = async (id) => {
-  let data = await listCustomer().getDataCustomer();
-  let dataLength = data.length;
-  console.log(id);
-  for (let i = 0; i < dataLength; i++) {
-    if ((data[i].id = id)) {
-      billDetail.innerHTML = data[i].listBillItem?.map((product) => {
-        return `
+  let data = await listCustomer().getDatabyId(id);
+  let item = data.listBillItem;
+
+  billDetail.innerHTML = item?.map((product) => {
+    return `
         <div class="bill__detail">
         <div class="bill__detail-img">
           <img src=${product.productImg} alt="" />
@@ -89,18 +85,36 @@ const displayBillDetail = async (id) => {
           <p class="bill__detail-name">${product.productName}</p>
         </div>
         <div class="bill__detail-quantity">
-          <p class="bill__detail-quantity">${product.productCount}</p>
+          <p class="bill__detail-count">${product.productCount}</p>
         </div>
         <div class="bill__detail-pirece-subtotal">
           <p class="bill__detail-subtotal">$ ${product.productPrice}</p>
         </div>
         <div class="bill__detail-totalPrice">
-          <p class="bill__detail-totalPrice">$ ${product.totalPrice}</p>
+          <p class="bill__detail-totalPrice">$ ${
+            product.productPrice * product.productCount
+          }</p>
         </div>
       </div>
         `;
+  });
+};
+
+async function remove(id) {
+  let lisDataSp = JSON.parse(localStorage.getItem(keyLocalStorageListSP));
+  let dataBillDetail = await listCustomer().getDatabyId(id);
+  let item = data.listBillItem;
+  if (confirm(" bạn muốn hủy đơn hàng ?")) {
+    listCustomer().deleteCustomer(id);
+    for (let i = 0; i < item.length; i++) {
+      lisDataSp.find((item) => {
+        if (item.id === item[i].productId) {
+          item.soLuong += 1;
+        }
       });
     }
+    localStorage.setItem(keyLocalStorageListSP, JSON.stringify(lisDataSp));
   }
-};
-// displayBillDetail();
+
+  console.log(dataBillDetail);
+}

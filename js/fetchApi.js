@@ -11,21 +11,18 @@ const listCustomer = () => {
     return dataCartItem;
   };
 
-  // const getItemById = async (id) => {
-  //   let arr = [];
-  //   let data = await getDataCustomer();
-  //   let dataLength = data.length;
-  //   for (let i = 0; i < dataLength; i++) {
-  //     if ((data[i].id = id)) {
-  //       data[i].cart.map((item)=>{
-  //         if(item.productId = )
-  //       })
-  //     }
-  //   }
-
-  //   return data;
-  //   console.log(data);
-  // };
+  const getDatabyId = async (id) => {
+    const apiUrl = customerApi;
+    const getDatabyIdUrl = `${apiUrl}/${id}`;
+    return await fetch(getDatabyIdUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        return data;
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
 
   const getDataCustomer = async () => {
     const response = await fetch(customerApi);
@@ -64,5 +61,6 @@ const listCustomer = () => {
     postDataCustomer,
     getCartItem,
     deleteCustomer,
+    getDatabyId,
   };
 };

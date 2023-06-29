@@ -198,6 +198,27 @@ thead tr:nth-child(7) {
   justify-content: space-between;
   margin-top: 10px;
 }
+.bill__detail-name {
+  width: 125px;
+  display: block;
+  display: -webkit-box;
+  height: 16px * 1.3 * 3;
+  font-size: 16px;
+  line-height: 1.3;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 10px;
+}
+
+.bill__detail-quantity {
+  width: 30px;
+}
+
+.bill__detail-count {
+  text-align: center;
+}
 
 .bill__detail-img {
   width: 60px;
