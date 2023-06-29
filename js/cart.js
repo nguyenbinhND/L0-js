@@ -514,6 +514,7 @@ const confirmBuy = document.querySelector(".btn-confirm");
 confirmBuy.addEventListener("click", async () => {
   checkError(fname, lname, email, phone, address);
   if (errorLength() === 0) {
+    let listBillItem = getbyID(listDataCartItem, dataCartItem);
     let customer = {
       idUser: await randomId(),
       fullName: `${fname.value} ${lname.value}`,
@@ -527,6 +528,7 @@ confirmBuy.addEventListener("click", async () => {
       totalQuantity: cart(),
       totalPrice: totalUi(),
       cart: dataCartItem,
+      listBillItem: listBillItem,
     };
     console.log(customer);
     listCustomer().postDataCustomer(customer);

@@ -1,29 +1,8 @@
 {
   "DANHSACHDONHANG": [
     {
-      "idUser": 4518,
-      "fullName": "nguyen  binh",
-      "address": "68 Phường Phú Thượng Quận Tây Hồ Thành phố Hà Nội",
-      "email": "binh123@gmail.com",
-      "phone": "0945645868",
-      "buyTime": "06/22/2023",
-      "itemNumber": 2,
-      "totalPrice": 288.82,
-      "cart": [
-        {
-          "productId": 2,
-          "count": 2
-        },
-        {
-          "productId": 3,
-          "count": 1
-        }
-      ],
-      "id": 1
-    },
-    {
       "idUser": 12,
-      "fullName": "asd asd",
+      "fullName": "pham oanh",
       "address": "18 Phường Trần Phú Thành phố Móng Cái Tỉnh Quảng Ninh",
       "email": "admin@gmail.com",
       "phone": "0945645868",
@@ -43,36 +22,46 @@
       "id": 2
     },
     {
-      "idUser": 9068,
-      "fullName": "das asd",
-      "address": "2314 Phường Trần Phú Thành phố Móng Cái Tỉnh Quảng Ninh",
-      "email": "admin@gmail.com",
+      "idUser": 3592,
+      "fullName": "nguyen binh",
+      "address": "18 Phường Phúc Xá Quận Ba Đình Thành phố Hà Nội",
+      "email": "binh123@gmail.com",
       "phone": "0945645868",
-      "buyTime": "06/22/2023",
-      "itemNumber": 2,
-      "totalPrice": 193.91,
+      "buyTime": "06/28/2023",
+      "itemNumber": 1,
+      "totalPrice": 100,
       "cart": [
         {
-          "productId": 2,
+          "productId": 1,
           "count": 1
-        },
+        }
+      ],
+      "listBillItem": [
         {
-          "productId": 3,
-          "count": 1
+          "productName": "Nike Women's Air Force 1 Shoe",
+          "productImg": "https://m.media-amazon.com/images/I/31kVjJ4QODL._AC_.jpg",
+          "productPrice": 100,
+          "productId": 1,
+          "productQuantity": 1,
+          "productCount": 1
         }
       ],
       "id": 3
     },
     {
-      "idUser": 2579,
-      "fullName": "sf sdf",
-      "address": "12 Phường Trung Thành Thành phố Thái Nguyên Tỉnh Thái Nguyên",
-      "email": "admin@gmail.com",
-      "phone": "0945645868",
-      "buyTime": "06/22/2023",
-      "itemNumber": 2,
-      "totalPrice": 193.91,
+      "idUser": 5378,
+      "fullName": "nam bui",
+      "address": "123 Phường Phú Thượng Quận Tây Hồ Thành phố Hà Nội",
+      "email": "nam@gmail.com",
+      "phone": "0934535345",
+      "buyTime": "06/28/2023",
+      "itemNumber": 3,
+      "totalPrice": 293.91,
       "cart": [
+        {
+          "productId": 1,
+          "count": 1
+        },
         {
           "productId": 2,
           "count": 1
@@ -82,24 +71,33 @@
           "count": 1
         }
       ],
-      "id": 4
-    },
-    {
-      "idUser": 4616,
-      "fullName": "sdf sdf",
-      "address": "12 Phường Phong Châu Thị xã Phú Thọ Tỉnh Phú Thọ",
-      "email": "admin@admin.com",
-      "phone": "0945645868",
-      "buyTime": "06/22/2023",
-      "itemNumber": 1,
-      "totalPrice": 99,
-      "cart": [
+      "listBillItem": [
         {
+          "productName": "Nike Women's Air Force 1 Shoe",
+          "productImg": "https://m.media-amazon.com/images/I/31kVjJ4QODL._AC_.jpg",
+          "productPrice": 100,
+          "productId": 1,
+          "productQuantity": 1,
+          "productCount": 1
+        },
+        {
+          "productName": "Nike Women's Modern",
+          "productImg": "https://m.media-amazon.com/images/I/511+TfOOujL._AC_UL1100_.jpg",
+          "productPrice": 94.91,
+          "productId": 2,
+          "productQuantity": 6,
+          "productCount": 1
+        },
+        {
+          "productName": "Nike Men's Sneaker",
+          "productImg": "https://m.media-amazon.com/images/I/319ACRCmwtL._AC_.jpg",
+          "productPrice": 99,
           "productId": 3,
-          "count": 1
+          "productQuantity": 16,
+          "productCount": 1
         }
       ],
-      "id": 5
+      "id": 4
     }
   ]
 }

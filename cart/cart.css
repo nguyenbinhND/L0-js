@@ -216,7 +216,7 @@ thead tr:nth-child(5) {
 }
 /* Bills */
 .bills {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
