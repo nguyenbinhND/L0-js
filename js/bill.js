@@ -1,3 +1,7 @@
+// import { cartExport } from "./main";
+
+// import { cart } from "./main";
+
 var billContent = document.querySelector(".bill__container");
 let overLay = document.querySelector(".overlay");
 let closeBill = document.querySelector(".overlay__content-header-close");
@@ -115,6 +119,8 @@ async function remove(id) {
     }
     localStorage.setItem(keyLocalStorageListSP, JSON.stringify(lisDataSp));
   }
-
-  console.log(dataBillDetail);
 }
+
+//  display ShopCart
+let cartShop = document.querySelector(".cart__account");
+cartExport(cartShop);

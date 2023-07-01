@@ -1,12 +1,13 @@
 var keyLocalStorageListSP = "DANHSACHSP";
 var keyLocalStorageItemCart = "DANHSACHITEMCART";
-var listDataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageListSP));
-var dataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
+let listDataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageListSP));
+let dataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
 var cartCategory = document.querySelector(".cart__category");
 var cartContent = document.querySelector(".cart__container");
 var totalPrice = document.querySelector(".total-price");
 var cartShop = document.querySelector(".cart__account");
 var hideBtnBuy = document.querySelector(".cart__category-total");
+
 // http://localhost:3000/DANHSACHDONHANG
 
 function cart() {
@@ -22,28 +23,12 @@ function cart() {
     return sumWithInitial;
   } else {
     sumWithInitial = initialValue;
-    hideBtnBuy.style.display = "none";
   }
-  // const sumWithInitial = arrList.reduce(
-  //   (accumulator, currentValue) => accumulator + currentValue.count,
-  //   initialValue
-  // );
-
-  // cartShop.innerHTML = sumWithInitial;
-  // return sumWithInitial;
 }
 cart();
 
-// function hideBuy() {
-//   if (cart() == 0) {
-//     hideBtnBuy.style.display = "none";
-//   } else hideBtnBuy.style.display = "block";
-// }
-
-function hideBuy() {
-  if (cart() == 0) {
-    hideBtnBuy.style.display = "none";
-  } else hideBtnBuy.style.display = "block";
+function hiddenBtnBuy() {
+  hideBtnBuy.style.display = "none";
 }
 
 function getItemByID(listDataCartItem, dataCartItem) {
@@ -68,11 +53,11 @@ function getItemByID(listDataCartItem, dataCartItem) {
   return listNewdata;
 }
 
-var keyLocalStorageListSP = "DANHSACHSP";
-var keyLocalStorageItemCart = "DANHSACHITEMCART";
+// var keyLocalStorageListSP = "DANHSACHSP";
+// var keyLocalStorageItemCart = "DANHSACHITEMCART";
+// var listDataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageListSP));
+// var dataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
 let dataCart = getbyID(listDataCartItem, dataCartItem);
-var listDataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageListSP));
-var dataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
 
 function getbyID(datas, cart) {
   let listCart = [];
@@ -103,7 +88,7 @@ function cartItemUI() {
      <span class="empty-cart">
      <img src="../img/empty-cart.png" alt="empty cart">
   </span> 
-  `)
+  `) && hiddenBtnBuy()
     : (cartContent.innerHTML = getbyID(listDataCartItem, dataCartItem).map(
         (item) => {
           return `
@@ -180,37 +165,6 @@ function removeItem(id) {
   cart();
 }
 
-// dataCart[i].productQuantity
-
-// them sp
-// function plusItem(id) {
-//   for (let i = 0; i < dataCartItem.length; i++) {
-//     if (
-//       dataCartItem[i].productId === Number(id) &&
-//       dataCartItem[i].count < listDataCartItem[i].soLuong
-//     ) {
-//       dataCartItem[i].count += 1;
-//       let minus = "minus";
-//       refreshQuantity(minus);
-//     }
-//   }
-//   cartItemUI();
-//   totalCart();
-// }
-// bot sp
-// function minusItem(id) {
-//   for (let i = 0; i < dataCartItem.length; i++) {
-//     if (dataCartItem[i].productId === Number(id) && dataCartItem[i].count > 1) {
-//       let plus = "plus";
-//       dataCartItem[i].count -= 1;
-//       refreshQuantity(plus);
-//     }
-//   }
-
-//   cartItemUI();
-//   totalCart();
-// }
-
 function plusItem(id) {
   const itemTemp = listDataCartItem.find((a) => a.id === Number(id));
   for (let i = 0; i < dataCartItem.length; i++) {
@@ -234,7 +188,6 @@ function plusItem(id) {
 }
 
 function minusItem(id) {
-  let dataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
   for (let i = 0; i < dataCartItem.length; i++) {
     if (dataCartItem[i].productId === Number(id) && dataCartItem[i].count > 0) {
       dataCartItem[i].count -= 1;
@@ -250,13 +203,8 @@ function minusItem(id) {
   localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(dataCartItem));
   cartItemUI();
   totalCart();
-  cartItemUI();
   cart();
 }
-
-// function hideBtnBuy() {
-//   hideBtnBuy.style.display = "none";
-// }
 
 //bai 8  lay thong tin tinh-huyen--xa
 async function Provinces() {
@@ -532,6 +480,7 @@ confirmBuy.addEventListener("click", async () => {
     };
     console.log(customer);
     listCustomer().postDataCustomer(customer);
+    refreshQuantity("minus");
     alert("thêm sản phẩm thành công");
     let arr = [];
     localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(arr));
@@ -542,28 +491,7 @@ confirmBuy.addEventListener("click", async () => {
 
 // cập nhật số lượng sản phẩm sau khi order
 function refreshQuantity(type) {
-  // listDataCartItem
   let newListProducts = [...listDataCartItem];
-  // for (let j = 0; j < dataCartItem.length; j++) {
-  //   for (let i = 0; i < listDataCartItem.length; i++) {
-  //     if (
-  //       listDataCartItem[i].id === dataCartItem[j].productId &&
-  //       listDataCartItem[i].soLuong > 1
-  //     ) {
-  //       let newItem = {
-  //         id: listDataCartItem[i].id,
-  //         name: listDataCartItem[i].name,
-  //         img: listDataCartItem[i].img,
-  //         price: listDataCartItem[i].price,
-  //         soLuong: Number(listDataCartItem[i].soLuong - dataCartItem[j].count),
-  //       };
-  //       newListProducts[i] = newItem;
-  //     }
-  //   }
-  // }
-  // console.log(newListProducts);
-  // localStorage.setItem(keyLocalStorageListSP, JSON.stringify(newListProducts));
-
   switch (type) {
     case "plus":
       for (let j = 0; j < dataCartItem.length; j++) {
@@ -607,6 +535,7 @@ function refreshQuantity(type) {
               ),
             };
             newListProducts[i] = newItem;
+            // listDataCartItem[i].soLuong - 1;
           }
         }
       }
