@@ -150,6 +150,34 @@
         }
       ],
       "id": 9
+    },
+    {
+      "idUser": 1206,
+      "fullName": "sfsdfcxve sdfs",
+      "address": "11 Phường Phúc Xá Quận Ba Đình Thành phố Hà Nội",
+      "email": "admin@gmail.com",
+      "phone": "0945645868",
+      "buyTime": "07/01/2023",
+      "itemNumber": 1,
+      "totalQuantity": 2,
+      "totalPrice": 189.82,
+      "cart": [
+        {
+          "productId": 2,
+          "count": 2
+        }
+      ],
+      "listBillItem": [
+        {
+          "productName": "Nike Women's Modern",
+          "productImg": "https://m.media-amazon.com/images/I/511+TfOOujL._AC_UL1100_.jpg",
+          "productPrice": 94.91,
+          "productId": 2,
+          "productQuantity": 4,
+          "productCount": 2
+        }
+      ],
+      "id": 10
     }
   ]
 }

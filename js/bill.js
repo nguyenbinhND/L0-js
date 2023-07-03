@@ -1,7 +1,3 @@
-// import { cartExport } from "./main";
-
-// import { cart } from "./main";
-
 var billContent = document.querySelector(".bill__container");
 let overLay = document.querySelector(".overlay");
 let closeBill = document.querySelector(".overlay__content-header-close");
