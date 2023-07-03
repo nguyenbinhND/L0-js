@@ -1,18 +1,15 @@
-const listCustomer = () => {
+const listCustomer = (() => {
   const customerApi = "http://localhost:3000/DANHSACHDONHANG";
-  let keyLocalStorageListSP = "DANHSACHSP";
-  let keyLocalStorageItemCart = "DANHSACHITEMCART";
+  const keyLocalStorageListSP = "DANHSACHSP";
+  const keyLocalStorageItemCart = "DANHSACHITEMCART";
 
-  const getCartItem = () => {
-    let dataCartItem = JSON.parse(
-      localStorage.getItem(keyLocalStorageItemCart)
-    );
-    return dataCartItem;
+  const getListItem = (url) => {
+    let dataListSp = JSON.parse(localStorage.getItem(url));
+    return dataListSp;
   };
 
-  const getListSp = () => {
-    let dataListSp = JSON.parse(localStorage.getItem(keyLocalStorageListSP));
-    return dataListSp;
+  const saveData = (key, value) => {
+    localStorage.setItem(key, JSON.stringify(value));
   };
 
   const getDatabyId = async (id) => {
@@ -61,11 +58,13 @@ const listCustomer = () => {
       });
   };
   return {
-    getCartItem,
-    getListSp,
+    getListItem,
+    saveData,
     getDataCustomer,
     postDataCustomer,
     deleteCustomer,
     getDatabyId,
+    keyLocalStorageListSP,
+    keyLocalStorageItemCart,
   };
-};
+})();

@@ -49,16 +49,15 @@ let dataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
 
 const cartItem = document.querySelector(".cart__account");
 
-function saveData() {
-  if (!localStorage.getItem(keyLocalStorageListSP))
-    localStorage.setItem(keyLocalStorageListSP, JSON.stringify(listData));
+function saveData(listData) {
+  if (!listCustomer.getListItem(listCustomer.keyLocalStorageListSP))
+    listCustomer.saveData(listCustomer.keyLocalStorageListSP, listData);
 }
-saveData();
+saveData(listData);
 
 function getData() {
-  let listData = JSON.parse(localStorage.getItem(keyLocalStorageListSP));
+  let listData = listCustomer.getListItem(listCustomer.keyLocalStorageListSP);
   let productList = document.querySelector(".category");
-
   productList.innerHTML =
     listData.length === 0
       ? ""
@@ -91,45 +90,21 @@ getData();
 
 // bai 4
 
-// function addSP(productId) {
-//   let arr = [];
-//   let count = 1;
-//   let check = 0;
-//   let product = { productId, count: count };
-
-//   if (JSON.parse(localStorage.getItem(keyLocalStorageItemCart))) {
-//     arr = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
-//   } else {
-//     arr = [];
-//   }
-//   let itemCart = listDataCartItem.find((item) => item.id === Number(productId));
-//   console.log(itemCart);
-//   for (let i = 0; i < arr.length; i++) {
-//     if (arr[i].productId === productId && arr[i].count < itemCart.soLuong) {
-//       check = 1;
-//       arr[i].count += 1;
-
-//       break;
-//     }
-//   }
-//   if (check == 0) arr.push(product);
-//   localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(arr));
-//   cart();
-// }
-
 function addSP(productId) {
   let arr = [];
   let count = 1;
   let check = 0;
   let product = { productId, count: count };
 
-  if (JSON.parse(localStorage.getItem(keyLocalStorageItemCart))) {
-    arr = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
+  if (listCustomer.getListItem(listCustomer.keyLocalStorageItemCart)) {
+    arr = listCustomer.getListItem(listCustomer.keyLocalStorageItemCart);
   } else {
     arr = [];
   }
+  let listDataCartItem = listCustomer.getListItem(
+    listCustomer.keyLocalStorageListSP
+  );
   let itemTemp = listDataCartItem.find((item) => item.id === Number(productId));
-  console.log(itemTemp);
   for (let i = 0; i < arr.length; i++) {
     if (arr[i].productId === Number(productId)) {
       check = 1;
@@ -150,12 +125,13 @@ function addSP(productId) {
     alert("Sản phẩm trong kho không đủ");
   }
   // if (check == 0) arr.push(product);
-  localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(arr));
+  // localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(arr));
+  listCustomer.saveData(listCustomer.keyLocalStorageItemCart, arr);
   cart();
 }
 
 function cart() {
-  arrList = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
+  arrList = listCustomer.getListItem(listCustomer.keyLocalStorageItemCart);
   let initialValue = 0;
   const sumWithInitial = arrList.reduce(
     (accumulator, currentValue) => accumulator + currentValue.count,
@@ -166,7 +142,7 @@ function cart() {
 cart();
 
 function cartExport(cart) {
-  arrList = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
+  arrList = listCustomer.getListItem(listCustomer.keyLocalStorageItemCart);
   let initialValue = 0;
   const sumWithInitial = arrList.reduce(
     (accumulator, currentValue) => accumulator + currentValue.count,

@@ -1,7 +1,5 @@
-var keyLocalStorageListSP = "DANHSACHSP";
-var keyLocalStorageItemCart = "DANHSACHITEMCART";
-let listDataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageListSP));
-let dataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
+let listSp = listCustomer.getListItem(listCustomer.keyLocalStorageListSP);
+let CartItem = listCustomer.getListItem(listCustomer.keyLocalStorageItemCart);
 var cartCategory = document.querySelector(".cart__category");
 var cartContent = document.querySelector(".cart__container");
 var totalPrice = document.querySelector(".total-price");
@@ -11,7 +9,7 @@ var hideBtnBuy = document.querySelector(".cart__category-total");
 // http://localhost:3000/DANHSACHDONHANG
 
 function cart() {
-  let arrList = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
+  let arrList = CartItem;
   let initialValue = 0;
   let sumWithInitial;
   if (arrList?.length > 0) {
@@ -53,11 +51,7 @@ function getItemByID(listDataCartItem, dataCartItem) {
   return listNewdata;
 }
 
-// var keyLocalStorageListSP = "DANHSACHSP";
-// var keyLocalStorageItemCart = "DANHSACHITEMCART";
-// var listDataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageListSP));
-// var dataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
-let dataCart = getbyID(listDataCartItem, dataCartItem);
+let dataCart = getbyID(listSp, CartItem);
 
 function getbyID(datas, cart) {
   let listCart = [];
@@ -83,15 +77,14 @@ function getbyID(datas, cart) {
 }
 
 function cartItemUI() {
-  dataCartItem.length === 0
+  CartItem.length === 0
     ? (cartContent.innerHTML = `  
      <span class="empty-cart">
      <img src="../img/empty-cart.png" alt="empty cart">
   </span> 
   `) && hiddenBtnBuy()
-    : (cartContent.innerHTML = getbyID(listDataCartItem, dataCartItem).map(
-        (item) => {
-          return `
+    : (cartContent.innerHTML = dataCart.map((item) => {
+        return `
         <div class="cart__content">
         <div class="cart__productName">
         <span class="cart__productName-img">
@@ -129,15 +122,15 @@ function cartItemUI() {
       </div>
       </div>
         `;
-        }
-      ));
+      }));
 }
 cartItemUI();
 
 function totalUi() {
-  let listCartData = getbyID(listDataCartItem, dataCartItem);
+  // let listCartData = getbyID(listDataCartItem, dataCartItem);
+  console.log(dataCart);
   const initialValue = 0;
-  const sumWithInitial = listCartData.reduce((accumulator, currentValue) => {
+  const sumWithInitial = dataCart.reduce((accumulator, currentValue) => {
     return accumulator + currentValue.productPrice * currentValue.productCount;
   }, initialValue);
   return Math.round(sumWithInitial * 100) / 100;
@@ -153,54 +146,54 @@ totalCart();
 
 // remove Item
 function removeItem(id) {
-  for (let i = 0; i < dataCartItem.length; i++) {
-    if (dataCartItem[i].productId === Number(id)) {
-      dataCartItem.splice(i, 1);
+  for (let i = 0; i < CartItem.length; i++) {
+    if (CartItem[i].productId === Number(id)) {
+      CartItem.splice(i, 1);
     }
   }
-  localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(dataCartItem));
-
-  cartItemUI();
+  // localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(dataCartItem));
+  listCustomer.saveData(listCustomer.keyLocalStorageItemCart, CartItem);
   totalCart();
   cart();
+  cartItemUI();
 }
 
 function plusItem(id) {
-  const itemTemp = listDataCartItem.find((a) => a.id === Number(id));
-  for (let i = 0; i < dataCartItem.length; i++) {
+  const itemTemp = listSp.find((a) => a.id === Number(id));
+  for (let i = 0; i < CartItem.length; i++) {
     if (
-      dataCartItem[i].productId === Number(id) &&
-      dataCartItem[i].count < itemTemp.soLuong
+      CartItem[i].productId === Number(id) &&
+      CartItem[i].count < itemTemp.soLuong
     ) {
-      dataCartItem[i].count += 1;
+      CartItem[i].count += 1;
     }
     if (
-      dataCartItem[i].productId == Number(id) &&
-      dataCartItem[i].count > itemTemp.soLuong
+      CartItem[i].productId == Number(id) &&
+      CartItem[i].count > itemTemp.soLuong
     ) {
       alert("Sản phẩm trong kho đã đạt giới hạn");
     }
   }
-  localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(dataCartItem));
+  listCustomer.saveData(listCustomer.keyLocalStorageItemCart, CartItem);
   cartItemUI();
   totalCart();
   cart();
 }
 
 function minusItem(id) {
-  for (let i = 0; i < dataCartItem.length; i++) {
-    if (dataCartItem[i].productId === Number(id) && dataCartItem[i].count > 0) {
-      dataCartItem[i].count -= 1;
+  for (let i = 0; i < CartItem.length; i++) {
+    if (CartItem[i].productId === Number(id) && CartItem[i].count > 0) {
+      CartItem[i].count -= 1;
     }
-    if (dataCartItem[i].count === 0) {
+    if (CartItem[i].count === 0) {
       if (confirm("Bạn muốn xóa sản phẩm?") === true) {
-        dataCartItem.splice(i, 1);
+        CartItem.splice(i, 1);
       } else {
-        dataCartItem[i].count = 1;
+        CartItem[i].count = 1;
       }
     }
   }
-  localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(dataCartItem));
+  listCustomer.saveData(listCustomer.keyLocalStorageItemCart, CartItem);
   cartItemUI();
   totalCart();
   cart();
@@ -297,13 +290,12 @@ listWards();
 
 async function randomId() {
   let randomUserID = Math.floor(Math.random() * 10000) + 1;
-  let dataOrder = await listCustomer().getDataCustomer();
+  let dataOrder = await listCustomer.getDataCustomer();
   for (let i = 0; i < dataOrder.length; i++) {
     if (dataOrder[i].idUser === randomUserID) {
       randomId();
     }
   }
-  console.log(randomUserID);
   return randomUserID;
 }
 
@@ -462,7 +454,7 @@ const confirmBuy = document.querySelector(".btn-confirm");
 confirmBuy.addEventListener("click", async () => {
   checkError(fname, lname, email, phone, address);
   if (errorLength() === 0) {
-    let listBillItem = getbyID(listDataCartItem, dataCartItem);
+    let listBillItem = getbyID(listSp, CartItem);
     let customer = {
       idUser: await randomId(),
       fullName: `${fname.value} ${lname.value}`,
@@ -478,12 +470,13 @@ confirmBuy.addEventListener("click", async () => {
       cart: dataCartItem,
       listBillItem: listBillItem,
     };
-    console.log(customer);
-    listCustomer().postDataCustomer(customer);
+
+    listCustomer.postDataCustomer(customer);
     refreshQuantity("minus");
     alert("thêm sản phẩm thành công");
     let arr = [];
-    localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(arr));
+    // localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(arr));
+    listCustomer.saveData(keyLocalStorageItemCart, arr);
     cartItemUI();
     hideBuy();
   }
@@ -491,20 +484,20 @@ confirmBuy.addEventListener("click", async () => {
 
 // cập nhật số lượng sản phẩm sau khi order
 function refreshQuantity(type) {
-  let newListProducts = [...listDataCartItem];
+  let newListProducts = [...listSp];
   switch (type) {
     case "plus":
-      for (let j = 0; j < dataCartItem.length; j++) {
-        for (let i = 0; i < listDataCartItem.length; i++) {
-          if (listDataCartItem[i].id === dataCartItem[j].productId) {
+      for (let j = 0; j < CartItem.length; j++) {
+        for (let i = 0; i < listSp.length; i++) {
+          if (listSp[i].id === CartItem[j].productId) {
             let newItem = {
-              id: listDataCartItem[i].id,
-              name: listDataCartItem[i].name,
-              img: listDataCartItem[i].img,
-              price: listDataCartItem[i].price,
+              id: listSp[i].id,
+              name: listSp[i].name,
+              img: listSp[i].img,
+              price: listSp[i].price,
               soLuong: Number(
                 // listDataCartItem[i].soLuong + dataCartItem[j].count
-                listDataCartItem[i].soLuong + 1
+                listSp[i].soLuong + 1
               ),
             };
             newListProducts[i] = newItem;
@@ -512,26 +505,25 @@ function refreshQuantity(type) {
         }
       }
       console.log(newListProducts);
-      localStorage.setItem(
-        keyLocalStorageListSP,
-        JSON.stringify(newListProducts)
-      );
+      // localStorage.setItem(
+      //   keyLocalStorageListSP,
+      //   JSON.stringify(newListProducts)
+      // );
+      listCustomer.saveData(keyLocalStorageListSP, newListProducts);
+
       break;
     case "minus":
-      for (let j = 0; j < dataCartItem.length; j++) {
-        for (let i = 0; i < listDataCartItem.length; i++) {
-          if (
-            listDataCartItem[i].id === dataCartItem[j].productId &&
-            listDataCartItem[i].soLuong > 1
-          ) {
+      for (let j = 0; j < CartItem.length; j++) {
+        for (let i = 0; i < listSp.length; i++) {
+          if (listSp[i].id === CartItem[j].productId && listSp[i].soLuong > 1) {
             let newItem = {
-              id: listDataCartItem[i].id,
-              name: listDataCartItem[i].name,
-              img: listDataCartItem[i].img,
-              price: listDataCartItem[i].price,
+              id: listSp[i].id,
+              name: listSp[i].name,
+              img: listSp[i].img,
+              price: listSp[i].price,
               soLuong: Number(
                 // listDataCartItem[i].soLuong - dataCartItem[j].count
-                listDataCartItem[i].soLuong - 1
+                listSp[i].soLuong - 1
               ),
             };
             newListProducts[i] = newItem;
@@ -540,10 +532,8 @@ function refreshQuantity(type) {
         }
       }
       console.log(newListProducts);
-      localStorage.setItem(
-        keyLocalStorageListSP,
-        JSON.stringify(newListProducts)
-      );
+      listCustomer.saveData(keyLocalStorageListSP, newListProducts);
+
       break;
 
     default:
