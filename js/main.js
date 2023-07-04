@@ -1,3 +1,5 @@
+// import { createToast } from "../showToast/toast";
+
 var listData = [
   {
     id: 1,
@@ -111,16 +113,21 @@ function addSP(productId) {
       // count += count;
       if (arr[i].count < itemTemp.soLuong) {
         arr[i].count += count;
-        alert("Thêm sản phẩm vào giỏ hàng thành công!");
+        // alert("Thêm sản phẩm vào giỏ hàng thành công!");
+        // createToast("success");
+        createToast("success", "Thêm sản phẩm vào giỏ hàng thành công!");
         break;
       } else {
-        alert("Sản phẩm đã đạt đến giới hạn!");
+        // alert("Sản phẩm đã đạt đến giới hạn!");
+        // createToast("warning");
+        createToast("warning", "Sản phẩm đã đạt đến giới hạn!");
       }
     }
   }
   if (check === 0 && itemTemp.soLuong > 0) {
     arr.push(product);
-    alert("Thêm sản phẩm vào giỏ hàng thành công!");
+    createToast("success", "Thêm sản phẩm vào giỏ hàng thành công!");
+    // createToast("success");
   } else if (itemTemp.soLuong === 0) {
     alert("Sản phẩm trong kho không đủ");
   }

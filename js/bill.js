@@ -14,7 +14,7 @@ function billTotalQuantity(arrList) {
 }
 
 async function getDataCustomer() {
-  let customerData = await listCustomer().getDataCustomer();
+  let customerData = await listCustomer.getDataCustomer();
   billContent.innerHTML = customerData.map((customer) => {
     return `
     <div class="bill__content">
@@ -65,14 +65,14 @@ closeBill.addEventListener("click", () => {
 });
 
 function data() {
-  let arr = listCustomer().getItemById();
+  let arr = listCustomer.getItemById();
   console.log(arr);
 }
 
 // bill detail
 let billDetail = document.querySelector(".bill__detail-content");
 const displayBillDetail = async (id) => {
-  let data = await listCustomer().getDatabyId(id);
+  let data = await listCustomer.getDatabyId(id);
   let item = data.listBillItem;
 
   billDetail.innerHTML = item?.map((product) => {
@@ -101,11 +101,11 @@ const displayBillDetail = async (id) => {
 };
 
 async function remove(id) {
-  let lisDataSp = JSON.parse(localStorage.getItem(keyLocalStorageListSP));
-  let dataBillDetail = await listCustomer().getDatabyId(id);
+  let lisDataSp = listCustomer.getListItem(listCustomer.keyLocalStorageListSP);
+  let dataBillDetail = await listCustomer.getDatabyId(id);
   let item = data.listBillItem;
   if (confirm(" bạn muốn hủy đơn hàng ?")) {
-    listCustomer().deleteCustomer(id);
+    listCustomer.deleteCustomer(id);
     for (let i = 0; i < item.length; i++) {
       lisDataSp.find((item) => {
         if (item.id === item[i].productId) {
@@ -113,7 +113,7 @@ async function remove(id) {
         }
       });
     }
-    localStorage.setItem(keyLocalStorageListSP, JSON.stringify(lisDataSp));
+    listCustomer.saveData(listCustomer.keyLocalStorageListSP, lisDataSp);
   }
 }
 

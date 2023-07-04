@@ -72,7 +72,6 @@ function getbyID(datas, cart) {
       }
     }
   }
-
   return listCart;
 }
 
@@ -83,7 +82,7 @@ function cartItemUI() {
      <img src="../img/empty-cart.png" alt="empty cart">
   </span> 
   `) && hiddenBtnBuy()
-    : (cartContent.innerHTML = dataCart.map((item) => {
+    : (cartContent.innerHTML = getbyID(listSp, CartItem).map((item) => {
         return `
         <div class="cart__content">
         <div class="cart__productName">
@@ -127,10 +126,9 @@ function cartItemUI() {
 cartItemUI();
 
 function totalUi() {
-  // let listCartData = getbyID(listDataCartItem, dataCartItem);
-  console.log(dataCart);
+  let listCartData = getbyID(listSp, CartItem);
   const initialValue = 0;
-  const sumWithInitial = dataCart.reduce((accumulator, currentValue) => {
+  const sumWithInitial = listCartData.reduce((accumulator, currentValue) => {
     return accumulator + currentValue.productPrice * currentValue.productCount;
   }, initialValue);
   return Math.round(sumWithInitial * 100) / 100;
@@ -175,9 +173,9 @@ function plusItem(id) {
     }
   }
   listCustomer.saveData(listCustomer.keyLocalStorageItemCart, CartItem);
-  cartItemUI();
-  totalCart();
   cart();
+  totalCart();
+  cartItemUI();
 }
 
 function minusItem(id) {
