@@ -3,20 +3,20 @@ let overLay = document.querySelector(".overlay");
 let closeBill = document.querySelector(".overlay__content-header-close");
 let cartShop = document.querySelector(".cart__account");
 
-// function billTotalQuantity(arrList) {
-//   let initialValue = 0;
-//   const sumWithInitial = arrList.cart.reduce(
-//     (accumulator, currentValue) => accumulator + currentValue.count,
-//     initialValue
-//   );
-
-//   return sumWithInitial;
-// }
-//  display ShopCart
-
 cart(cartShop);
+// function billTotalQuantity(arrList) {
+//   cartExport(arrList);
+// }
+
 function billTotalQuantity(arrList) {
-  cartExport(arrList);
+  let initialValue = 0;
+  const sumWithInitial = arrList.cart.reduce(
+    (accumulator, currentValue) => accumulator + currentValue.count,
+    initialValue
+  );
+
+  console.log(sumWithInitial);
+  return sumWithInitial;
 }
 
 async function getDataCustomer() {
@@ -55,8 +55,6 @@ async function getDataCustomer() {
     </div>
   </div>`;
   });
-
-  // console.log(customerData);
 }
 getDataCustomer();
 

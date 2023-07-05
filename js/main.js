@@ -1,5 +1,3 @@
-// import { createToast } from "../showToast/toast";
-
 var listData = [
   {
     id: 1,
@@ -48,7 +46,6 @@ let keyLocalStorageListSP = "DANHSACHSP";
 let keyLocalStorageItemCart = "DANHSACHITEMCART";
 let listDataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageListSP));
 let dataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
-
 const cartItem = document.querySelector(".cart__account");
 
 function saveData(listData) {
@@ -110,16 +107,13 @@ function addSP(productId) {
   for (let i = 0; i < arr.length; i++) {
     if (arr[i].productId === Number(productId)) {
       check = 1;
-      // count += count;
+
       if (arr[i].count < itemTemp.soLuong) {
         arr[i].count += count;
-        // alert("Thêm sản phẩm vào giỏ hàng thành công!");
-        // createToast("success");
+
         createToast("success", "Thêm sản phẩm vào giỏ hàng thành công!");
         break;
       } else {
-        // alert("Sản phẩm đã đạt đến giới hạn!");
-        // createToast("warning");
         createToast("warning", "Sản phẩm đã đạt đến giới hạn!");
       }
     }
@@ -127,7 +121,6 @@ function addSP(productId) {
   if (check === 0 && itemTemp.soLuong > 0) {
     arr.push(product);
     createToast("success", "Thêm sản phẩm vào giỏ hàng thành công!");
-    // createToast("success");
   } else if (itemTemp.soLuong === 0) {
     createToast("warning", "Sản phẩm trong kho không đủ!");
   }
@@ -156,4 +149,5 @@ function cartExport(cart) {
     initialValue
   );
   cart.innerHTML = sumWithInitial;
+  return initialValue;
 }

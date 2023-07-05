@@ -407,7 +407,6 @@ cancel.addEventListener("click", () => {
   let errorPhone = document.querySelector(".errorPhone");
   let errorHouse = document.querySelector(".errorHouse");
   let errorSelect = document.querySelector(".errorSelect");
-  // let errorSelect = document.querySelector(".errorSelect");
   bill.style.display = "none";
   fname.value = "";
   lname.value = "";
@@ -449,7 +448,6 @@ function errorLength() {
     errorSelect.length
   );
 }
-// console.log({ address });
 const confirmBuy = document.querySelector(".btn-confirm");
 confirmBuy.addEventListener("click", async () => {
   checkError(fname, lname, email, phone, address);
@@ -475,7 +473,6 @@ confirmBuy.addEventListener("click", async () => {
     refreshQuantity("minus");
     createToast("success", "đã mua hàng thành công!");
     let arr = [];
-    // localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(arr));
     listCustomer.saveData(keyLocalStorageItemCart, arr);
     cartItemUI();
     hideBuy();
@@ -495,20 +492,13 @@ function refreshQuantity(type) {
               name: listSp[i].name,
               img: listSp[i].img,
               price: listSp[i].price,
-              soLuong: Number(
-                // listDataCartItem[i].soLuong + dataCartItem[j].count
-                listSp[i].soLuong + 1
-              ),
+              soLuong: Number(listSp[i].soLuong + 1),
             };
             newListProducts[i] = newItem;
           }
         }
       }
       console.log(newListProducts);
-      // localStorage.setItem(
-      //   keyLocalStorageListSP,
-      //   JSON.stringify(newListProducts)
-      // );
       listCustomer.saveData(keyLocalStorageListSP, newListProducts);
 
       break;
@@ -521,10 +511,7 @@ function refreshQuantity(type) {
               name: listSp[i].name,
               img: listSp[i].img,
               price: listSp[i].price,
-              soLuong: Number(
-                // listDataCartItem[i].soLuong - dataCartItem[j].count
-                listSp[i].soLuong - 1
-              ),
+              soLuong: Number(listSp[i].soLuong - 1),
             };
             newListProducts[i] = newItem;
             // listDataCartItem[i].soLuong - 1;
