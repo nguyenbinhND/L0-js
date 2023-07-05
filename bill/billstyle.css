@@ -236,3 +236,164 @@ thead tr:nth-child(7) {
 .bill__detail-totalPrice {
   margin-right: 25px;
 }
+.bill__content-item,
+.bill__content-quantity {
+  text-align: center;
+}
+.bill__content-item-number {
+  text-align: start;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .bill__content-price-total {
+    padding-left: 0px;
+  }
+  .bill__content {
+    margin: 0px 32px;
+  }
+
+  .bill__delete {
+    margin-left: 0;
+    padding-right: 25px;
+  }
+
+  .bill__content-item,
+  .bill__content-quantity {
+    text-align: center;
+  }
+
+  .overlay__container {
+    width: 80%;
+  }
+  .menu__content {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .bill__content {
+    margin: 0;
+    justify-content: space-evenly;
+    margin-left: 28px;
+  }
+
+  .cart__category thead {
+    padding-right: 25px;
+  }
+  .bill__detail-totalPrice {
+    margin-right: 34px;
+  }
+
+  .bill__content-customer {
+    width: 13%;
+  }
+  .bill__content-price-total {
+    padding-left: 0px;
+    text-align: center;
+    padding-right: 20px;
+  }
+  .cart__productName-info .title {
+    width: 200px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    display: block;
+    display: -webkit-box;
+    height: 16px * 1.3 * 3;
+    font-size: 16px;
+    line-height: 1.3;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 10px;
+  }
+
+  .bill__detail-quantity {
+    padding-right: 56px;
+    text-align: center;
+  }
+
+  .bill__detail-pirece-subtotal {
+    padding-right: 32px;
+    text-align: center;
+  }
+
+  .bill__detail {
+    margin: 10px 10px 0 0;
+  }
+
+  .menu__content {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .cart__category thead {
+    column-gap: 4px;
+  }
+
+  table {
+    width: 96%;
+  }
+
+  .overlay__container {
+    width: 96%;
+  }
+
+  .cart__category {
+    padding: 0;
+  }
+
+  .bill__detail-img img {
+    margin-left: 8px;
+  }
+
+  .bill__detail-name {
+    width: 98px;
+  }
+
+  .bill__detail-quantity {
+    padding-right: 24px;
+  }
+
+  .bill__detail-totalPrice {
+    margin-right: 16px;
+  }
+
+  .cart__category.bill table thead tr:nth-child(3),
+  .cart__category.bill table thead tr:nth-child(4),
+  .bill__content-date,
+  .bill__content-item {
+    display: none;
+  }
+  thead tr:nth-child(7) {
+    margin-right: 0;
+  }
+
+  .bill__detail-pirece-subtotal {
+    padding-right: 18px;
+  }
+
+  .bill__content {
+    width: 100%;
+    margin: 0px;
+    justify-content: space-between;
+  }
+  .bill__content-item,
+  .bill__content-quantity {
+    text-align: center;
+    padding-left: 24px;
+  }
+
+  .bill__content {
+    text-align: center;
+    padding-left: 10px;
+  }
+  .bill__content-price-total {
+    padding-left: 0px;
+  }
+
+  .bill__delete {
+    margin: 0 18px 0 0;
+  }
+}

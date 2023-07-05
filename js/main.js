@@ -47,6 +47,12 @@ let keyLocalStorageItemCart = "DANHSACHITEMCART";
 let listDataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageListSP));
 let dataCartItem = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
 const cartItem = document.querySelector(".cart__account");
+// let menu = document.querySelector(".menu");
+let menuContent = document.querySelector(".menu__content");
+
+function showMenu() {
+  menuContent.classList.toggle("menu__content-active");
+}
 
 function saveData(listData) {
   if (!listCustomer.getListItem(listCustomer.keyLocalStorageListSP))
@@ -77,7 +83,7 @@ function getData() {
     <div class="category__items-info">
       <p class="category__items-name">${product.name}</p>
       <div class="category__items-des">
-        <p class="prices">${product.price}</p>
+        <p class="prices">${product.price} $</p>
         <p class="quantity">Quantity:${product.soLuong}</p>
       </div>
     </div>
