@@ -150,6 +150,7 @@ function removeItem(id) {
     }
   }
   // localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(dataCartItem));
+  createToast("success", "xóa sản phẩm hàng thành công!");
   listCustomer.saveData(listCustomer.keyLocalStorageItemCart, CartItem);
   totalCart();
   cart();
@@ -167,9 +168,9 @@ function plusItem(id) {
     }
     if (
       CartItem[i].productId == Number(id) &&
-      CartItem[i].count > itemTemp.soLuong
+      CartItem[i].count === itemTemp.soLuong
     ) {
-      alert("Sản phẩm trong kho đã đạt giới hạn");
+      createToast("warning", "Sản phẩm đã đạt đến giới hạn!");
     }
   }
   listCustomer.saveData(listCustomer.keyLocalStorageItemCart, CartItem);
@@ -186,6 +187,7 @@ function minusItem(id) {
     if (CartItem[i].count === 0) {
       if (confirm("Bạn muốn xóa sản phẩm?") === true) {
         CartItem.splice(i, 1);
+        createToast("success", "xóa sản phẩm  thành công!");
       } else {
         CartItem[i].count = 1;
       }
@@ -471,7 +473,7 @@ confirmBuy.addEventListener("click", async () => {
 
     listCustomer.postDataCustomer(customer);
     refreshQuantity("minus");
-    alert("thêm sản phẩm thành công");
+    createToast("success", "đã mua hàng thành công!");
     let arr = [];
     // localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(arr));
     listCustomer.saveData(keyLocalStorageItemCart, arr);

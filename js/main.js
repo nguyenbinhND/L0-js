@@ -129,7 +129,7 @@ function addSP(productId) {
     createToast("success", "Thêm sản phẩm vào giỏ hàng thành công!");
     // createToast("success");
   } else if (itemTemp.soLuong === 0) {
-    alert("Sản phẩm trong kho không đủ");
+    createToast("warning", "Sản phẩm trong kho không đủ!");
   }
   // if (check == 0) arr.push(product);
   // localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(arr));
@@ -157,5 +157,3 @@ function cartExport(cart) {
   );
   cart.innerHTML = sumWithInitial;
 }
-
-// cartExport(cartItem);

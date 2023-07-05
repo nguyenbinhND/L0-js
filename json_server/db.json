@@ -1,49 +1,21 @@
 {
   "DANHSACHDONHANG": [
     {
-      "idUser": 7690,
-      "fullName": "pham oanh",
-      "address": "68 Phường Thanh Trì Quận Hoàng Mai Thành phố Hà Nội",
-      "email": "binh123@gmail.com",
-      "phone": "0945645868",
-      "buyTime": "06/29/2023",
-      "itemNumber": 1,
-      "totalPrice": 306.21,
-      "cart": [
-        {
-          "productId": 4,
-          "count": 3
-        }
-      ],
-      "listBillItem": [
-        {
-          "productName": "Nike Gymnastics Shoes",
-          "productImg": "https://m.media-amazon.com/images/I/61eFsJgcGhL._AC_UL1100_.jpg",
-          "productPrice": 102.07,
-          "productId": 4,
-          "productQuantity": 12,
-          "productCount": 3
-        }
-      ],
-      "id": 5
-    },
-    {
-      "idUser": 1153,
+      "idUser": 6211,
       "fullName": "nguyen binh",
-      "address": "18 Phường Phúc Tân Quận Hoàn Kiếm Thành phố Hà Nội",
-      "email": "binh123@gmail.com",
+      "address": "18 Phường Phúc Xá Quận Ba Đình Thành phố Hà Nội",
+      "email": "admin@gmail.com",
       "phone": "0945645868",
-      "buyTime": "06/29/2023",
+      "buyTime": "07/05/2023",
       "itemNumber": 2,
-      "totalQuantity": 2,
-      "totalPrice": 194.91,
+      "totalPrice": 199,
       "cart": [
         {
           "productId": 1,
           "count": 1
         },
         {
-          "productId": 2,
+          "productId": 3,
           "count": 1
         }
       ],
@@ -57,15 +29,15 @@
           "productCount": 1
         },
         {
-          "productName": "Nike Women's Modern",
-          "productImg": "https://m.media-amazon.com/images/I/511+TfOOujL._AC_UL1100_.jpg",
-          "productPrice": 94.91,
-          "productId": 2,
-          "productQuantity": 6,
+          "productName": "Nike Men's Sneaker",
+          "productImg": "https://m.media-amazon.com/images/I/319ACRCmwtL._AC_.jpg",
+          "productPrice": 99,
+          "productId": 3,
+          "productQuantity": 20,
           "productCount": 1
         }
       ],
-      "id": 6
+      "id": 1
     }
   ]
 }

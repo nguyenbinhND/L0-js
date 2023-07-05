@@ -51,7 +51,7 @@ const listCustomer = (() => {
       method: "DELETE",
     })
       .then(() => {
-        alert("removed successful");
+        createToast("success", "Hủy đơn hàng thành công!");
       })
       .catch((err) => {
         console.error(err);
