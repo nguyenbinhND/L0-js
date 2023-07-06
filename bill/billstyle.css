@@ -328,8 +328,9 @@ thead tr:nth-child(7) {
 }
 
 @media only screen and (max-width: 600px) {
-  .cart__category thead {
-    column-gap: 4px;
+  .overlay__container .cart__category {
+    width: 132%;
+    margin-top: 0px;
   }
 
   table {
@@ -338,51 +339,19 @@ thead tr:nth-child(7) {
 
   .overlay__container {
     width: 96%;
+    overflow: auto;
+    margin-top: 22px;
   }
-
-  .cart__category {
-    padding: 0;
+  .bill__detail {
+    width: 470px;
   }
 
   .bill__detail-img img {
-    margin-left: 8px;
+    margin-left: 0px;
   }
 
-  .bill__detail-name {
-    width: 98px;
-  }
-
-  .bill__detail-quantity {
-    padding-right: 24px;
-  }
-
-  .bill__detail-totalPrice {
-    margin-right: 16px;
-  }
-
-  .cart__category.bill table thead tr:nth-child(3),
-  .cart__category.bill table thead tr:nth-child(4),
-  .bill__content-date,
-  .bill__content-item {
-    display: none;
-  }
-  thead tr:nth-child(7) {
-    margin-right: 0;
-  }
-
-  .bill__detail-pirece-subtotal {
-    padding-right: 18px;
-  }
-
-  .bill__content {
-    width: 100%;
-    margin: 0px;
-    justify-content: space-between;
-  }
-  .bill__content-item,
-  .bill__content-quantity {
-    text-align: center;
-    padding-left: 24px;
+  .overlay__container table thead tr:nth-child(3) {
+    padding-left: 30px;
   }
 
   .bill__content {
@@ -393,7 +362,29 @@ thead tr:nth-child(7) {
     padding-left: 0px;
   }
 
-  .bill__delete {
-    margin: 0 18px 0 0;
+  .cart__category.bill {
+    overflow: auto;
+  }
+
+  .bill__content {
+    width: 604px;
+    margin: 0;
+  }
+
+  .bill__content-price-total {
+    padding-left: 32px;
+  }
+
+  .bill__content-item {
+    padding-left: 10px;
+  }
+
+  .bill__detail-totalPrice {
+    margin-right: 8px;
+  }
+
+  .bill__detail-quantity {
+    width: 30px;
+    padding-right: 50px;
   }
 }

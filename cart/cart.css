@@ -406,10 +406,6 @@ textarea {
   color: #e74c3c;
 }
 
-/* .menu__content {
-  display: none;
-} */
-
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
   .cart__content {
     margin: 0 30px 0 30px;
@@ -455,6 +451,7 @@ textarea {
 @media only screen and (max-width: 600px) {
   .cart__category {
     padding: 0;
+    overflow: auto;
   }
   .cart__category thead {
     column-gap: 23px;
@@ -506,6 +503,7 @@ textarea {
   .btn-back,
   .bills__container {
     width: 100%;
+    margin-bottom: 42px;
   }
 
   .cart__sub {
