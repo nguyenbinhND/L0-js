@@ -95,7 +95,7 @@ const displayBillDetail = async (id) => {
           <p class="bill__detail-subtotal">$ ${product.productPrice}</p>
         </div>
         <div class="bill__detail-totalPrice">
-          <p class="bill__detail-totalPrice">$ ${
+          <p class="bill__totalPrice">$ ${
             product.productPrice * product.productCount
           }</p>
         </div>
