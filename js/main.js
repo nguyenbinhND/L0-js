@@ -136,13 +136,32 @@ function addSP(productId) {
   cart();
 }
 
+// function cart() {
+//   arrList = listCustomer.getListItem(listCustomer.keyLocalStorageItemCart);
+//   let initialValue = 0;
+//   const sumWithInitial = arrList.reduce(
+//     (accumulator, currentValue) => accumulator + currentValue.count,
+//     initialValue
+//   );
+//   cartItem.innerHTML = sumWithInitial;
+// }
+// cart();
+
+// function cartExport(cart) {
+//   arrList = listCustomer.getListItem(listCustomer.keyLocalStorageItemCart);
+//   let initialValue = 0;
+//   const sumWithInitial = arrList.reduce(
+//     (accumulator, currentValue) => accumulator + currentValue.count,
+//     initialValue
+//   );
+//   cart.innerHTML = sumWithInitial;
+//   return initialValue;
+// }
+
 function cart() {
   arrList = listCustomer.getListItem(listCustomer.keyLocalStorageItemCart);
   let initialValue = 0;
-  const sumWithInitial = arrList.reduce(
-    (accumulator, currentValue) => accumulator + currentValue.count,
-    initialValue
-  );
+  const sumWithInitial = arrList.length;
   cartItem.innerHTML = sumWithInitial;
 }
 cart();
@@ -150,10 +169,8 @@ cart();
 function cartExport(cart) {
   arrList = listCustomer.getListItem(listCustomer.keyLocalStorageItemCart);
   let initialValue = 0;
-  const sumWithInitial = arrList.reduce(
-    (accumulator, currentValue) => accumulator + currentValue.count,
-    initialValue
-  );
+  const sumWithInitial = arrList.length;
+  cartItem.innerHTML = sumWithInitial;
   cart.innerHTML = sumWithInitial;
   return initialValue;
 }

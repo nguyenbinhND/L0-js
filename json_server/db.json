@@ -1,21 +1,21 @@
 {
   "DANHSACHDONHANG": [
     {
-      "idUser": 6211,
+      "idUser": 219,
       "fullName": "nguyen binh",
       "address": "18 Phường Phúc Xá Quận Ba Đình Thành phố Hà Nội",
       "email": "admin@gmail.com",
       "phone": "0945645868",
-      "buyTime": "07/05/2023",
+      "buyTime": "07/16/2023",
       "itemNumber": 2,
-      "totalPrice": 199,
+      "totalPrice": 194.91,
       "cart": [
         {
           "productId": 1,
           "count": 1
         },
         {
-          "productId": 3,
+          "productId": 2,
           "count": 1
         }
       ],
@@ -29,10 +29,10 @@
           "productCount": 1
         },
         {
-          "productName": "Nike Men's Sneaker",
-          "productImg": "https://m.media-amazon.com/images/I/319ACRCmwtL._AC_.jpg",
-          "productPrice": 99,
-          "productId": 3,
+          "productName": "Nike Women's Modern",
+          "productImg": "https://m.media-amazon.com/images/I/511+TfOOujL._AC_UL1100_.jpg",
+          "productPrice": 94.91,
+          "productId": 2,
           "productQuantity": 20,
           "productCount": 1
         }

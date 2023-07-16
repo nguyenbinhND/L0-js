@@ -104,18 +104,38 @@ const displayBillDetail = async (id) => {
   });
 };
 
+// async function remove(id) {
+//   let lisDataSp = listCustomer.getListItem(listCustomer.keyLocalStorageListSP);
+//   let dataBillDetail = await listCustomer.getDatabyId(id);
+//   let itemData = dataBillDetail.find((item) => item.id === id);
+//   let item = itemData.listBillItem;
+//   if (confirm(" bạn muốn hủy đơn hàng ?")) {
+//     listCustomer.deleteCustomer(id);
+//     for (let i = 0; i < item.length; i++) {
+//       lisDataSp.find((item) => {
+//         if (item.id === item[i].productId) {
+//           item.soLuong += 1;
+//         }
+//       });
+//     }
+//     listCustomer.saveData(listCustomer.keyLocalStorageListSP, lisDataSp);
+//   }
+// }
+
 async function remove(id) {
   let lisDataSp = listCustomer.getListItem(listCustomer.keyLocalStorageListSP);
   let dataBillDetail = await listCustomer.getDatabyId(id);
-  let item = data.listBillItem;
+  console.log(dataBillDetail);
+  // let itemData = dataBillDetail.find((item) => item.id === id);
+  let item = dataBillDetail.listBillItem;
   if (confirm(" bạn muốn hủy đơn hàng ?")) {
     listCustomer.deleteCustomer(id);
     for (let i = 0; i < item.length; i++) {
-      lisDataSp.find((item) => {
-        if (item.id === item[i].productId) {
-          item.soLuong += 1;
+      for (let j = 0; j < lisDataSp.length; j++) {
+        if (item[i].productId === lisDataSp[j].id) {
+          lisDataSp[j].soLuong += 1;
         }
-      });
+      }
     }
     listCustomer.saveData(listCustomer.keyLocalStorageListSP, lisDataSp);
   }

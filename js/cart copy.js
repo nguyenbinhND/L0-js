@@ -253,7 +253,6 @@ async function Wards() {
 async function listProvinces() {
   let province = document.querySelector(".province");
   let data = await Provinces();
-
   if (data && data.length > 0) {
     data.map((city) => {
       let options = `<option value="${city.code}">${city.name}</option>`;
@@ -263,23 +262,43 @@ async function listProvinces() {
 }
 listProvinces();
 
-async function getDistrictbyProviceId() {
-  let city = document.querySelector(".province");
-  let district = document.querySelector(".districts");
+async function listDistricts() {
+  let province = document.querySelector(".province");
+  let listDistricts = document.querySelector(".districts");
   let data = await Districts();
-  city.addEventListener("change", (e) => {
-    district.innerHTML = `<option value="0">--Chọn Huyện/Quận--</option>`;
-    if (data && data?.length > 0) {
-      data.map((element) => {
-        if (element.province_code === Number(city.value)) {
-          let options = `<option value="${element.code}">${element.name}</option>`;
-          district.insertAdjacentHTML("beforeend", options);
+  province.addEventListener("change", (e) => {
+    if (data && data.length > 0) {
+      data.map((districts) => {
+        if (districts.province_code === Number(e.target.value)) {
+          let options = `<option value="${districts.code}">${districts.name}</option>`;
+          listDistricts.insertAdjacentHTML("beforeend", options);
         }
       });
     }
   });
 }
-getDistrictbyProviceId();
+listDistricts();
+
+// async function listDistricts() {
+//   let province = document.querySelector(".province");
+//   let listDistricts = document.querySelector(".districts");
+//   let data = await Districts();
+//   province.addEventListener("change", (e) => {
+//     if (data && data.length > 0) {
+//       let dataDis = data.filter((item) => {
+//         return item.province_code === Number(e.target.value);
+//       });
+//       console.log(dataDis);
+//       data.map((districts) => {
+//         if (districts.province_code === Number(e.target.value)) {
+//           let options = `<option value="${districts.code}">${districts.name}</option>`;
+//           listDistricts.insertAdjacentHTML("beforeend", options);
+//         }
+//       });
+//     }
+//   });
+// }
+// listDistricts();
 
 async function listWards() {
   let listDistricts = document.querySelector(".districts");
@@ -288,9 +307,8 @@ async function listWards() {
 
   listDistricts.addEventListener("change", (e) => {
     if (data && data.length > 0) {
-      listWards.innerHTML = `<option value="0">--Chọn Phường/Xã--</option>`;
       data.map((ward) => {
-        if (ward.district_code === Number(listDistricts.value)) {
+        if (ward.district_code === Number(e.target.value)) {
           let options = `<option value="${ward.code}">${ward.name}</option>`;
           listWards.insertAdjacentHTML("beforeend", options);
         }
@@ -361,10 +379,6 @@ function checkEmail(input, err) {
   }
 }
 
-function isVietnamesePhoneNumber(number) {
-  return /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(number);
-}
-
 // check submit form
 
 function checkError(fname, lname, email, phone, address) {
@@ -389,12 +403,7 @@ function checkError(fname, lname, email, phone, address) {
   if (phone.value.trim() == "") {
     showError(errorPhone, "Không được để trống số điện thoại");
   } else {
-    if (
-      isVietnamesePhoneNumber(phone.value.trim()) &&
-      phone.value.trim().length < 11
-    ) {
-      showSuccess(errorPhone);
-    } else showError(errorPhone, "vd: 03/09 + số điện thoại và < 10 số ");
+    showSuccess(errorPhone);
   }
   if (province.value == "") {
     showError(errorSelect, "Không được để trống thành phố");
@@ -440,6 +449,7 @@ cancel.addEventListener("click", () => {
   phone.value = "";
   address.value = "";
   // mess.value = "";
+  Provinces();
 
   showSuccess(errorName, errorEmail, errorPhone, errorHouse, errorSelect);
 });
@@ -495,8 +505,8 @@ confirmBuy.addEventListener("click", async () => {
       listBillItem: listBillItem,
     };
 
-    refreshQuantity("minus");
     listCustomer.postDataCustomer(customer);
+    refreshQuantity("minus");
     createToast("success", "đã mua hàng thành công!");
     let arr = [];
     listCustomer.saveData(keyLocalStorageItemCart, arr);
@@ -531,7 +541,7 @@ function refreshQuantity(type) {
     case "minus":
       for (let j = 0; j < CartItem.length; j++) {
         for (let i = 0; i < listSp.length; i++) {
-          if (listSp[i].id === CartItem[j].productId && listSp[i].soLuong > 0) {
+          if (listSp[i].id === CartItem[j].productId && listSp[i].soLuong > 1) {
             let newItem = {
               id: listSp[i].id,
               name: listSp[i].name,
