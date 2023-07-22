@@ -1,9 +1,9 @@
 {
   "DANHSACHDONHANG": [
     {
-      "idUser": 219,
+      "idUser": 2575,
       "fullName": "nguyen binh",
-      "address": "18 Phường Phúc Xá Quận Ba Đình Thành phố Hà Nội",
+      "address": "18 Phường Phúc Tân Quận Hoàn Kiếm Thành phố Hà Nội",
       "email": "admin@gmail.com",
       "phone": "0945645868",
       "buyTime": "07/16/2023",
@@ -11,11 +11,11 @@
       "totalPrice": 194.91,
       "cart": [
         {
-          "productId": 1,
+          "productId": 2,
           "count": 1
         },
         {
-          "productId": 2,
+          "productId": 1,
           "count": 1
         }
       ],
@@ -38,6 +38,33 @@
         }
       ],
       "id": 1
+    },
+    {
+      "idUser": 2945,
+      "fullName": "asad asd",
+      "address": "18 Phường Hùng Vương Thành phố Phúc Yên Tỉnh Vĩnh Phúc",
+      "email": "admin@admin.com",
+      "phone": "0945645868",
+      "buyTime": "07/22/2023",
+      "itemNumber": 1,
+      "totalPrice": 99,
+      "cart": [
+        {
+          "productId": 3,
+          "count": 1
+        }
+      ],
+      "listBillItem": [
+        {
+          "productName": "Nike Men's Sneaker",
+          "productImg": "https://m.media-amazon.com/images/I/319ACRCmwtL._AC_.jpg",
+          "productPrice": 99,
+          "productId": 3,
+          "productQuantity": 20,
+          "productCount": 1
+        }
+      ],
+      "id": 2
     }
   ]
 }

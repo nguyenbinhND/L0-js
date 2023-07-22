@@ -8,23 +8,6 @@ var hideBtnBuy = document.querySelector(".cart__category-total");
 
 // http://localhost:3000/DANHSACHDONHANG
 
-// function cart() {
-//   let arrList = CartItem;
-//   let initialValue = 0;
-//   let sumWithInitial;
-//   if (arrList?.length > 0) {
-//     sumWithInitial = arrList.reduce(
-//       (accumulator, currentValue) => accumulator + currentValue.count,
-//       initialValue
-//     );
-//     cartShop.innerHTML = sumWithInitial;
-//     return sumWithInitial;
-//   } else {
-//     sumWithInitial = initialValue;
-//   }
-// }
-// cart();
-
 function cart() {
   let arrList = CartItem;
   let initialValue = 0;
@@ -365,7 +348,17 @@ function isVietnamesePhoneNumber(number) {
   return /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(number);
 }
 
+function checkName(input) {
+  console.log(/[a-zA-Z0-9&_\.-]/.test(input));
+
+  return /[a-zA-Z0-9&_\.-]/.test(input);
+}
+
 // check submit form
+const getdataBill = async () => {
+  let customerData = await listCustomer.getDataCustomer();
+  return customerData;
+};
 
 function checkError(fname, lname, email, phone, address) {
   let errorName = document.querySelector(".errorName");
@@ -377,7 +370,17 @@ function checkError(fname, lname, email, phone, address) {
   if ((fname.value.trim() == "") | (lname.value.trim() == "")) {
     showError(errorName, "không được để trống họ hoặc tên");
   } else {
-    showSuccess(errorName);
+    // showSuccess(errorName);
+    if (!checkName(fname.value.trim()) || !checkName(lname.value.trim())) {
+      //   console.log(" hihih ");
+
+      showError(errorName, "Họ hoặc Tên không chứa ký tự đặc biệt");
+      // } else if (
+      //   checkName(fname.value.trim()) === false &&
+      //   checkName(lname.value.trim()) === true
+      // ) {
+      //   showError(errorName, "Tên không chứa ký tự đặc biệt");
+    } else showSuccess(errorName);
   }
 
   if (email.value.trim() == "") {
@@ -474,10 +477,14 @@ function errorLength() {
     errorSelect.length
   );
 }
+// const dataApiServe = getdataBill();
+const dataApiServe = listCustomer.customerApi;
 const confirmBuy = document.querySelector(".btn-confirm");
 confirmBuy.addEventListener("click", async () => {
   checkError(fname, lname, email, phone, address);
+
   if (errorLength() === 0) {
+    setTimeout(() => {}, 1000);
     let listBillItem = getbyID(listSp, CartItem);
     let customer = {
       idUser: await randomId(),
@@ -497,11 +504,14 @@ confirmBuy.addEventListener("click", async () => {
 
     refreshQuantity("minus");
     listCustomer.postDataCustomer(customer);
-    createToast("success", "đã mua hàng thành công!");
     let arr = [];
     listCustomer.saveData(keyLocalStorageItemCart, arr);
     cartItemUI();
     hideBuy();
+    createToast("success", "đã mua hàng thành công!");
+  }
+  if (errorLength() === 0 && !dataApiServe) {
+    createToast("error", "server bị lỗi đặt hàng thất bại");
   }
 });
 
